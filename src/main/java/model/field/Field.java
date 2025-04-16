@@ -1,6 +1,7 @@
 package model.field;
 
 import model.player.Player;
+import game.GameContext;
 
 public class Field {
     private final String name;
@@ -21,7 +22,7 @@ public class Field {
         return position;
     }
 
-    public void executeEffect(Player player, GameManager gm) {
-        effect.apply(player, gm);
+    public void executeEffect(Player player, GameContext gc) {
+        effect.apply(player, gc);
     }
 }
