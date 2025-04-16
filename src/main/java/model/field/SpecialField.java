@@ -1,5 +1,6 @@
 package model.field;
 
+import model.field.effect.FieldEffect;
 import model.player.Player;
 
 public class SpecialField extends Field implements Ownable {

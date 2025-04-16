@@ -1,4 +1,4 @@
-package model.field;
+package model.field.effect;
 
 import game.GameContext;
 import model.player.Player;

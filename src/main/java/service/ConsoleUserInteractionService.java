@@ -2,7 +2,7 @@ package service;
 
 import io.GameIO;
 import model.field.Ownable;
-import model.field.PropertyField;
+import model.field.effect.PropertyField;
 import model.player.Player;
 
 import java.util.ArrayList;

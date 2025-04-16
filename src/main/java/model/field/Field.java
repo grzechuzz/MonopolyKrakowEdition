@@ -1,5 +1,7 @@
 package model.field;
 
+import model.field.effect.FieldEffect;
+import model.field.effect.NoActionEffect;
 import model.player.Player;
 import game.GameContext;
 

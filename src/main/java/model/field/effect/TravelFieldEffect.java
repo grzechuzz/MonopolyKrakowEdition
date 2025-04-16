@@ -1,4 +1,4 @@
-package model.field;
+package model.field.effect;
 
 public class TravelFieldEffect {
 }

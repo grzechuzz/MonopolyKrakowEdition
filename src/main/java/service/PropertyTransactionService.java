@@ -1,6 +1,6 @@
 package service;
 
-import model.field.PropertyField;
+import model.field.effect.PropertyField;
 import model.player.Player;
 import model.field.Ownable;
 
@@ -113,7 +113,7 @@ public class PropertyTransactionService {
         field.setHotel(true);
     }
 
-    public void buyPropertyFromOpponent(Player buyer, Player seller, PropertyField field) {
+    public void buyOpponentField(Player buyer, Player seller, PropertyField field) {
         int buyoutPrice = (int)(field.calculateValue() * 1.5);
 
         if (buyer.getBalance() < buyoutPrice)

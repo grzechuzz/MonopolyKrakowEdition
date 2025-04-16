@@ -1,7 +1,7 @@
 package service;
 
 import model.field.Ownable;
-import model.field.PropertyField;
+import model.field.effect.PropertyField;
 import model.player.Player;
 
 import java.util.List;

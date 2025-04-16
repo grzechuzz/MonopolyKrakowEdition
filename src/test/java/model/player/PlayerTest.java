@@ -1,6 +1,8 @@
 package model.player;
 
 import model.field.*;
+import model.field.effect.NoActionEffect;
+import model.field.effect.PropertyField;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
