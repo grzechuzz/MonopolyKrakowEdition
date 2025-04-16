@@ -1,6 +1,8 @@
 package io;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class ConsoleIO implements GameIO {
     private final Scanner sc = new Scanner(System.in);
@@ -26,5 +28,27 @@ public class ConsoleIO implements GameIO {
                 System.out.println("Podano bledny argument, sprobuj ponownie!");
             }
         }
+    }
+
+    @Override
+    public List<Integer> readInts() {
+        String line = sc.nextLine().trim();
+
+        if (line.isEmpty())
+            return List.of();
+
+        String[] tokens = line.split("\\s+");
+        List<Integer> result = new ArrayList<>() ;
+
+        for (String token : tokens) {
+            try {
+                int idx = Integer.parseInt(token);
+                result.add(idx);
+            } catch (NumberFormatException e) {
+                // ignore
+            }
+        }
+
+        return result;
     }
 }
