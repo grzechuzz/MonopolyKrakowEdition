@@ -75,7 +75,7 @@ public class PropertyField extends Field implements Ownable {
         else if (housesCount == 0 && !hotel)
             return basePrice;
         else
-            return (int)(basePrice * 2.5);
+            return basePrice * 3;
     }
 
     @Override
