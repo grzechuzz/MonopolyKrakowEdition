@@ -3,6 +3,7 @@ package model.player;
 import model.field.Ownable;
 
 import java.util.ArrayList;
+import java.util.IllformedLocaleException;
 import java.util.List;
 
 
@@ -37,12 +38,18 @@ public class Player {
         this.position = position;
     }
 
-    public void addBalance(int balance) {
-        this.balance += balance;
+    public void addBalance(int amount) {
+        if (amount < 0)
+            throw new IllegalArgumentException("Amount cannot be negative!");
+        balance += amount;
     }
 
-    public void subtractBalance(int balance) {
-        this.balance -= balance;
+    public void subtractBalance(int amount) {
+        if (amount < 0)
+            throw new IllegalArgumentException("Amount cannot be negative!");
+        if (balance < amount)
+            throw new IllegalStateException("Balance too low: can't do that operation.");
+        balance -= amount;
     }
 
     public List<Ownable> getProperties() {

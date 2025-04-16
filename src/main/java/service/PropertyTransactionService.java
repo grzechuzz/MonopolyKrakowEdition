@@ -1,6 +1,6 @@
 package service;
 
-import model.field.effect.PropertyField;
+import model.field.PropertyField;
 import model.player.Player;
 import model.field.Ownable;
 

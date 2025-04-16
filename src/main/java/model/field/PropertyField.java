@@ -1,7 +1,6 @@
-package model.field.effect;
+package model.field;
 
-import model.field.Field;
-import model.field.Ownable;
+import model.field.effect.FieldEffect;
 import model.player.Player;
 
 public class PropertyField extends Field implements Ownable {
