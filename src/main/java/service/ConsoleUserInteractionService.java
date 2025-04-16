@@ -55,7 +55,7 @@ public class ConsoleUserInteractionService implements UserInteractionService {
             io.displayMessage(i + ") " + fields.get(i).getName() + " " + fields.get(i).calculateValue() + " PLN");
         }
 
-        System.out.println("Wybierz nieruchomość na której chcesz ustawić festiwal (CZYNSZ x2): ");
+        io.displayMessage("Wybierz nieruchomość na której chcesz ustawić festiwal (CZYNSZ x2): ");
         int choice = io.readInt();
 
         if (choice >= 0 && choice < fields.size())
@@ -65,12 +65,15 @@ public class ConsoleUserInteractionService implements UserInteractionService {
     }
 
     @Override
-    public void displayBankruptcyMessage(Player player) {
-        io.displayMessage("Gracz " + player.getNickname() + " jest bankrutem!");
+    public int promptHouseCount(PropertyField field, int max) {
+        io.displayMessage("Ile domów chcesz postawić na polu " + field.getName() + " (0–" + max + ")?");
+        int choice = io.readInt();
+
+        return Math.max(0, Math.min(max, choice));
     }
 
     @Override
-    public void forceSellMessage(Player player, int amount) {
-        io.displayMessage("Gracz " + player.getNickname() + " sprzedaje nieruchomości o wartości " + amount + " PLN!");
+    public void displayMessage(String message) {
+        io.displayMessage(message);
     }
 }

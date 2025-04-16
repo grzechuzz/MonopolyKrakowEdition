@@ -10,6 +10,6 @@ public interface UserInteractionService {
     boolean confirmPurchase(String fieldName, int price);
     List<Ownable> propertiesToSell(Player player);
     PropertyField chooseFestivalField(Player player);
-    void displayBankruptcyMessage(Player player);
-    void forceSellMessage(Player player, int amount);
+    int promptHouseCount(PropertyField field, int max);
+    void displayMessage(String message);
 }
