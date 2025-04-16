@@ -15,16 +15,18 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         this.io = io;
     }
 
+    @Override
     public boolean confirmPurchase(String fieldName, int price) {
         return io.askYesNo("Czy chcesz kupić pole " + fieldName + " za " + price + " PLN?");
     }
 
+    @Override
     public List<Ownable> propertiesToSell(Player player) {
         io.displayMessage("Wybierz nieruchomości do sprzedaży.");
         List<Ownable> properties = player.getProperties();
 
         for (int i = 0; i < properties.size(); ++i)
-            System.out.println(i + ") " + properties.get(i).getName() + " " + properties.get(i).calculateValue() + "PLN");
+            io.displayMessage(i + ") " + properties.get(i).getName() + " " + properties.get(i).calculateValue() + "PLN");
 
         io.displayMessage("Wpisz numery nieruchomości do sprzedaży (oddzielone spacją): ");
         List<Integer> indices = io.readInts();
@@ -38,6 +40,7 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         return toSell;
     }
 
+    @Override
     public PropertyField chooseFestivalField(Player player) {
         List<PropertyField> fields = new ArrayList<>();
         for (Ownable field : player.getProperties()) {
@@ -49,7 +52,7 @@ public class ConsoleUserInteractionService implements UserInteractionService {
             return null;
 
         for (int i = 0; i < fields.size(); ++i) {
-            System.out.println(i + ") " + fields.get(i).getName() + " " + fields.get(i).calculateValue() + " PLN");
+            io.displayMessage(i + ") " + fields.get(i).getName() + " " + fields.get(i).calculateValue() + " PLN");
         }
 
         System.out.println("Wybierz nieruchomość na której chcesz ustawić festiwal (CZYNSZ x2): ");
@@ -59,5 +62,15 @@ public class ConsoleUserInteractionService implements UserInteractionService {
             return fields.get(choice);
 
         return null;
+    }
+
+    @Override
+    public void displayBankruptcyMessage(Player player) {
+        io.displayMessage("Gracz " + player.getNickname() + " jest bankrutem!");
+    }
+
+    @Override
+    public void forceSellMessage(Player player, int amount) {
+        io.displayMessage("Gracz " + player.getNickname() + " sprzedaje nieruchomości o wartości " + amount + " PLN!");
     }
 }

@@ -7,8 +7,9 @@ import model.player.Player;
 import java.util.List;
 
 public interface UserInteractionService {
-    public boolean confirmPurchase(String fieldName, int price);
-    public List<Ownable> propertiesToSell(Player player);
-    public PropertyField chooseFestivalField(Player player);
-
+    boolean confirmPurchase(String fieldName, int price);
+    List<Ownable> propertiesToSell(Player player);
+    PropertyField chooseFestivalField(Player player);
+    void displayBankruptcyMessage(Player player);
+    void forceSellMessage(Player player, int amount);
 }
