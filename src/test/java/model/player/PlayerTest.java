@@ -2,7 +2,7 @@ package model.player;
 
 import model.field.*;
 import model.field.effect.NoActionEffect;
-import model.field.effect.PropertyField;
+import model.field.PropertyField;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,6 +27,21 @@ class PlayerTest {
         player.subtractBalance(50000);
 
         assertEquals(4950000, player.getBalance());
+    }
+
+    @Test
+    void testAddBalanceShouldThrowIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> player.addBalance(-1000));
+    }
+
+    @Test
+    void testSubtractBalanceShouldThrowIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> player.subtractBalance(-1000));
+    }
+
+    @Test
+    void testSubtractBalanceShouldThrowIllegalStateException() {
+        assertThrows(IllegalStateException.class, () -> player.subtractBalance(70000000));
     }
 
     @Test
