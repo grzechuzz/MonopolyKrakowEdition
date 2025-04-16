@@ -8,5 +8,6 @@ public interface Ownable {
     int getPrice();
     int calculateRent();
     int calculateValue();
+    String getName();
     void cleanUp();
 }
