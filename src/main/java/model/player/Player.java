@@ -57,10 +57,12 @@ public class Player {
     }
 
     public void addProperty(Ownable field) {
+        field.setOwner(this);
         properties.add(field);
     }
 
     public void deleteProperty(Ownable field) {
+        field.setOwner(null);
         properties.remove(field);
     }
 

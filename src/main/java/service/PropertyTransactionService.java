@@ -61,7 +61,7 @@ public class PropertyTransactionService {
         player.subtractBalance(amount);
     }
 
-    public boolean buyProperty(Player player, Ownable field) {
+    public boolean buyField(Player player, Ownable field) {
         int price = field.getPrice();
         if (player.getBalance() < price) {
             ui.displayMessage("Nie wystarczające fundusze, by dokonać transakcji.");
