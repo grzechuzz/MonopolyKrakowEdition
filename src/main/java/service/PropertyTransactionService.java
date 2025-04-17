@@ -14,6 +14,27 @@ public class PropertyTransactionService {
         this.ui = ui;
     }
 
+    public void bankruptPlayer(Player player) {
+        player.getStatus().setEliminated(true);
+        for (Ownable f : player.getProperties())
+            f.cleanUp();
+
+        player.getProperties().clear();
+        ui.displayMessage("Gracz " + player.getNickname() + " jest bankrutem!");
+    }
+
+    public void forceSell(Player player) {
+        List<Ownable> toSell = ui.propertiesToSell(player);
+        int sum = 0;
+        for (Ownable o : toSell) {
+            sum += o.calculateValue();
+            o.cleanUp();
+            player.deleteProperty(o);
+        }
+        player.addBalance(sum);
+        ui.displayMessage("Gracz " + player.getNickname() + " sprzedaje nieruchomości o wartości " + sum + " PLN!");
+    }
+
     public void pay(Player from, Player to, int amount) {
         if (from.getBalance() < amount) {
             forceSell(from);
@@ -40,88 +61,70 @@ public class PropertyTransactionService {
         player.subtractBalance(amount);
     }
 
-    public void bankruptPlayer(Player player) {
-        player.getStatus().setEliminated(true);
-        for (Ownable f : player.getProperties())
-            f.cleanUp();
-
-        ui.displayMessage("Gracz " + player.getNickname() + " jest bankrutem!");
-    }
-
-    public void forceSell(Player player) {
-        List<Ownable> toSell = ui.propertiesToSell(player);
-        int sum = 0;
-        for (Ownable o : toSell) {
-            sum += o.calculateValue();
-            o.cleanUp();
-            player.deleteProperty(o);
-        }
-        player.addBalance(sum);
-        ui.displayMessage("Gracz " + player.getNickname() + " sprzedaje nieruchomości o wartości " + sum + " PLN!");
-    }
-
-    public void buyProperty(Player player, Ownable field) {
+    public boolean buyProperty(Player player, Ownable field) {
         int price = field.getPrice();
         if (player.getBalance() < price) {
             ui.displayMessage("Nie wystarczające fundusze, by dokonać transakcji.");
-            return;
+            return false;
         }
 
         boolean confirm = ui.confirmPurchase(field.getName(), price);
         if (!confirm)
-            return;
+            return false;
 
         player.subtractBalance(price);
         player.addProperty(field);
-        field.setOwner(player);
         ui.displayMessage(player.getNickname() + " kupuje " + field.getName() + " za " + price + " PLN");
+        return true;
     }
 
-    public void buildHouses(Player player, PropertyField field) {
+    public boolean buildHouses(Player player, PropertyField field) {
         boolean firstLap = (player.getStatus().getLaps() == 1);
         int maxHousesAllowed = firstLap ? 2 : 3;
         int housesRemaining = 3 - field.getHousesCount();
         int max = Math.min(maxHousesAllowed, housesRemaining);
 
         if (max <= 0)
-            return;
+            return false;
 
         int requested = ui.promptHouseCount(field, max);
         int totalCost = (int)(requested * field.getPrice() * 0.5);
 
         if (player.getBalance() < totalCost) {
             ui.displayMessage("Nie wystarczające fundusze, by dokonać transakcji.");
-            return;
+            return false;
         }
 
         field.setHousesCount(field.getHousesCount() + requested);
         player.subtractBalance(totalCost);
+        return true;
     }
 
-    public void upgradeToHotel(Player player, PropertyField field) {
+    public boolean upgradeToHotel(Player player, PropertyField field) {
         if (field.getHousesCount() != 3)
-            return;
+            return false;
 
         int totalCost = (int)(1.5 * field.getPrice());
         if (player.getBalance() < totalCost) {
             ui.displayMessage("Nie wystarczające fundusze, by dokonać transakcji.");
-            return;
+            return false;
         }
 
         player.subtractBalance(totalCost);
         field.setHousesCount(0);
         field.setHotel(true);
+        return true;
     }
 
-    public void buyOpponentField(Player buyer, Player seller, PropertyField field) {
+    public boolean buyOpponentField(Player buyer, Player seller, PropertyField field) {
         int buyoutPrice = (int)(field.calculateValue() * 1.5);
 
         if (buyer.getBalance() < buyoutPrice)
-            return;
+            return false;
 
         boolean confirm = ui.confirmPurchase(field.getName(), buyoutPrice);
         if (!confirm)
-            return;
+            return false;
 
 
         buyer.subtractBalance(buyoutPrice);
@@ -129,9 +132,10 @@ public class PropertyTransactionService {
 
         seller.deleteProperty(field);
         buyer.addProperty(field);
-        field.setOwner(buyer);
 
         ui.displayMessage(buyer.getNickname() + " odkupił " + field.getName()
                 + " za " + buyoutPrice + " PLN od gracza " + seller.getNickname() + ".");
+
+        return true;
     }
 }
