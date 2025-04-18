@@ -24,6 +24,8 @@ public class TravelService {
                 fieldsToTravel.add(ownable);
         }
 
+        player.getStatus().setTravel(false);
+
         if (fieldsToTravel.isEmpty())
             return player.getPosition();
 
@@ -32,7 +34,6 @@ public class TravelService {
             return player.getPosition();
 
 
-        player.getStatus().setTravel(false);
         return ((Field)o).getPosition();
     }
 }
