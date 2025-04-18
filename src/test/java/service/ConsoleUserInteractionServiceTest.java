@@ -1,6 +1,5 @@
 package service;
 
-
 import io.GameIO;
 import model.field.PropertyField;
 import model.field.ResortField;
@@ -16,7 +15,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-
 
 @ExtendWith(MockitoExtension.class)
 public class ConsoleUserInteractionServiceTest {
@@ -92,5 +90,21 @@ public class ConsoleUserInteractionServiceTest {
         when(io.readInt()).thenReturn(-3);
 
         assertEquals(0, cuis.promptHouseCount(pf, 3));
+    }
+
+
+    @Test
+    void testChooseJailOptionCorrectArgumentGiven() {
+        when(io.readInt()).thenReturn(3);
+
+        assertEquals(3, cuis.chooseJailOption());
+    }
+
+
+    @Test
+    void testChooseJailOptionWrongArgumentGiven() {
+        when(io.readInt()).thenReturn(88);
+
+        assertEquals(2, cuis.chooseJailOption());
     }
 }
