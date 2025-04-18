@@ -49,7 +49,12 @@ class PlayerTest {
         player.addProperty(new PropertyField("PropertyField1", 0, new NoActionEffect(), 5, 2));
         player.addProperty(new ResortField("ResortField1", 1, new NoActionEffect(), 5, 2));
 
-        assertEquals(2, player.getProperties().size());
+        assertAll(
+                () -> assertEquals(2, player.getProperties().size()),
+                () -> assertEquals(player, player.getProperties().get(0).getOwner()),
+                () -> assertEquals(player, player.getProperties().get(1).getOwner())
+        );
+
     }
 
     @Test
@@ -61,6 +66,10 @@ class PlayerTest {
 
         player.deleteProperty(rf);
 
-        assertEquals(1, player.getProperties().size());
+        assertAll(
+                () -> assertEquals(1, player.getProperties().size()),
+                () -> assertNull(rf.getOwner())
+        );
+
     }
 }
