@@ -79,6 +79,9 @@ public class PropertyTransactionService {
     }
 
     public boolean buildHouses(Player player, PropertyField field) {
+        if (field.getOwner() != player)
+            return false;
+
         boolean firstLap = (player.getStatus().getLaps() == 1);
         int maxHousesAllowed = firstLap ? 2 : 3;
         int housesRemaining = 3 - field.getHousesCount();
@@ -101,6 +104,9 @@ public class PropertyTransactionService {
     }
 
     public boolean upgradeToHotel(Player player, PropertyField field) {
+        if (field.getOwner() != player)
+            return false;
+
         if (field.getHousesCount() != 3)
             return false;
 
@@ -117,6 +123,9 @@ public class PropertyTransactionService {
     }
 
     public boolean buyOpponentField(Player buyer, Player seller, PropertyField field) {
+        if (field.getOwner() != seller)
+            return false;
+
         int buyoutPrice = (int)(field.calculateValue() * 1.5);
 
         if (buyer.getBalance() < buyoutPrice)
