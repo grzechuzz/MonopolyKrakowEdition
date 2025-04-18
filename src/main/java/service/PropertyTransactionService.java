@@ -64,7 +64,7 @@ public class PropertyTransactionService {
     public boolean buyField(Player player, Ownable field) {
         int price = field.getPrice();
         if (player.getBalance() < price) {
-            ui.displayMessage("Nie wystarczające fundusze, by dokonać transakcji.");
+            ui.displayMessage("Niewystarczające fundusze, by dokonać transakcji.");
             return false;
         }
 
@@ -91,7 +91,7 @@ public class PropertyTransactionService {
         int totalCost = (int)(requested * field.getPrice() * 0.5);
 
         if (player.getBalance() < totalCost) {
-            ui.displayMessage("Nie wystarczające fundusze, by dokonać transakcji.");
+            ui.displayMessage("Niewystarczające fundusze, by dokonać transakcji.");
             return false;
         }
 
@@ -106,7 +106,7 @@ public class PropertyTransactionService {
 
         int totalCost = (int)(1.5 * field.getPrice());
         if (player.getBalance() < totalCost) {
-            ui.displayMessage("Nie wystarczające fundusze, by dokonać transakcji.");
+            ui.displayMessage("Niewystarczające fundusze, by dokonać transakcji.");
             return false;
         }
 
