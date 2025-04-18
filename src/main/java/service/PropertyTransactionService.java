@@ -35,30 +35,32 @@ public class PropertyTransactionService {
         ui.displayMessage("Gracz " + player.getNickname() + " sprzedaje nieruchomości o wartości " + sum + " PLN!");
     }
 
-    public void pay(Player from, Player to, int amount) {
+    public boolean pay(Player from, Player to, int amount) {
         if (from.getBalance() < amount) {
             forceSell(from);
             if (from.getBalance() < amount) {
                 to.addBalance(from.getBalance());
                 bankruptPlayer(from);
-                return;
+                return false;
             }
         }
 
         from.subtractBalance(amount);
         to.addBalance(amount);
+        return true;
     }
 
-    public void payToBank(Player player, int amount) {
+    public boolean payToBank(Player player, int amount) {
         if (player.getBalance() < amount) {
             forceSell(player);
             if (player.getBalance() < amount) {
                 bankruptPlayer(player);
-                return;
+                return false;
             }
         }
 
         player.subtractBalance(amount);
+        return true;
     }
 
     public boolean buyField(Player player, Ownable field) {

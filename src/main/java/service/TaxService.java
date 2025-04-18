@@ -25,7 +25,8 @@ public class TaxService {
 
         int tax = (int)(toPay * 0.1);
 
-        pts.payToBank(player, tax);
-        ui.displayMessage("Gracz " + player.getNickname() + " zapłacił " + tax + " PLN podatku.");
+        boolean paid = pts.payToBank(player, tax);
+        if (paid)
+            ui.displayMessage("Gracz " + player.getNickname() + " zapłacił " + tax + " PLN podatku.");
     }
 }
