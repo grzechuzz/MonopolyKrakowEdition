@@ -1,6 +1,7 @@
 package service;
 
 import io.GameIO;
+import model.field.Field;
 import model.field.Ownable;
 import model.field.PropertyField;
 import model.player.Player;
@@ -64,6 +65,20 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         return null;
     }
 
+    @Override
+    public Ownable chooseTravelDestination(List<Ownable> fields) {
+        io.displayMessage("Wybierz pole, na które chcesz podróżować.");
+        for (int i = 0; i < fields.size(); ++i)
+            io.displayMessage(i + ") " + fields.get(i).getName());
+
+        io.displayMessage("Wybierz numer pola, na które chcesz przejść: ");
+        int choice = io.readInt();
+
+        if (choice < 0 || choice >= fields.size())
+            return null;
+
+        return fields.get(choice);
+    }
 
     @Override
     public int promptHouseCount(PropertyField field, int max) {
