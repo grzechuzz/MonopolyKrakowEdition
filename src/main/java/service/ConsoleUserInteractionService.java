@@ -64,6 +64,7 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         return null;
     }
 
+
     @Override
     public int promptHouseCount(PropertyField field, int max) {
         io.displayMessage("Ile domów chcesz postawić na polu " + field.getName() + " (0–" + max + ")?");
@@ -71,6 +72,8 @@ public class ConsoleUserInteractionService implements UserInteractionService {
 
         return Math.max(0, Math.min(max, choice));
     }
+
+
 
     @Override
     public void displayMessage(String message) {
