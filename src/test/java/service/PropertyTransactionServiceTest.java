@@ -166,12 +166,14 @@ class PropertyTransactionServiceTest {
     @Test
     void testBuyFieldWithNotEnoughMoneyToBuy() {
         player1.subtractBalance(4800000);
+
         assertFalse(pts.buyField(player1, field));
     }
 
     @Test
     void testBuyFieldWithNegativeAnswer() {
         when(ui.confirmPurchase(field.getName(), field.getPrice())).thenReturn(false);
+
         assertFalse(pts.buyField(player1, field));
     }
 
@@ -196,9 +198,97 @@ class PropertyTransactionServiceTest {
         );
     }
 
+    @Test
+    void testBuildHouses() {
+        when(ui.promptHouseCount(field, 2)).thenReturn(2);
+        field.setOwner(player1);
 
+        assertAll(
+                () -> assertTrue(pts.buildHouses(player1, field)),
+                () -> assertEquals(4480000, player1.getBalance()),
+                () -> assertEquals(2, field.getHousesCount())
+        );
+    }
 
+    @Test
+    void testBuildHousesWhenFieldNotOwned() {
+        assertFalse(pts.buildHouses(player1, field));
+    }
 
+    @Test
+    void testBuildHousesWhenLimitSatisfied() {
+        field.setHousesCount(3);
+        field.setOwner(player1);
 
+        assertFalse(pts.buildHouses(player1, field));
+    }
+
+    @Test
+    void testBuildHousesWithNotEnoughMoney() {
+        player1.subtractBalance(5000000);
+        field.setOwner(player1);
+        when(ui.promptHouseCount(field, 2)).thenReturn(1);
+
+        assertFalse(pts.buildHouses(player1, field));
+    }
+
+    @Test
+    void testUpgradeToHotel() {
+        field.setHousesCount(3);
+        field.setOwner(player1);
+
+        assertTrue(pts.upgradeToHotel(player1, field));
+    }
+
+    @Test
+    void testUpgradeToHotelWhenFieldNotOwned() {
+        assertFalse(pts.upgradeToHotel(player1, field));
+    }
+
+    @Test
+    void testUpgradeToHotelWhenNotEnoughHouses() {
+        field.setHousesCount(2);
+        field.setOwner(player1);
+
+        assertFalse(pts.upgradeToHotel(player1, field));
+    }
+
+    @Test
+    void testUpgradeToHotelWithNotEnoughMoney() {
+        field.setHousesCount(3);
+        player1.subtractBalance(4500000);
+        field.setOwner(player1);
+
+        assertFalse(pts.upgradeToHotel(player1, field));
+    }
+
+    @Test
+    void testBuyOpponentField() {
+        player1.addProperty(field);
+        when(ui.confirmPurchase(field.getName(), 780000)).thenReturn(true);
+
+        assertAll(
+                () -> assertTrue(pts.buyOpponentField(player2, player1, field)),
+                () -> assertEquals(player2, field.getOwner()),
+                () -> assertEquals(5780000, player1.getBalance()),
+                () -> assertEquals(4220000, player2.getBalance()),
+                () -> assertFalse(player1.getProperties().contains(field)),
+                () -> assertTrue(player2.getProperties().contains(field))
+        );
+    }
+
+    @Test
+    void testBuyOponentFieldWithNoConfirmation() {
+        field.setOwner(player1);
+        when(ui.confirmPurchase(field.getName(), 780000)).thenReturn(false);
+
+        assertFalse(pts.buyOpponentField(player2, player1, field));
+    }
+
+    @Test
+    void buyOpponentFieldWithNotEnoughMoney() {
+        player1.subtractBalance(4000000);
+        assertFalse(pts.buyOpponentField(player1, player2, field));
+    }
 }
 
