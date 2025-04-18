@@ -1,6 +1,7 @@
 package service;
 
 import io.GameIO;
+import model.field.Ownable;
 import model.field.PropertyField;
 import model.field.ResortField;
 import model.player.Player;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -106,5 +108,23 @@ public class ConsoleUserInteractionServiceTest {
         when(io.readInt()).thenReturn(88);
 
         assertEquals(2, cuis.chooseJailOption());
+    }
+
+    @Test
+    void testChooseTravelDestinationReturnCorrectField() {
+        PropertyField pf2 = new PropertyField("test2", 4, null, 50000, 20000);
+        ResortField rf2 = new ResortField("Resort2", 9, null, 100000, 30000);
+        List<Ownable> o = new ArrayList<>(List.of(pf, pf2, rf, rf2));
+        when(io.readInt()).thenReturn(3);
+
+        assertEquals(cuis.chooseTravelDestination(o), rf2);
+    }
+
+    @Test
+    void testChooseTravelDestinationReturnNull() {
+        List<Ownable> o = new ArrayList<>(List.of(pf, rf));
+        when(io.readInt()).thenReturn(3);
+
+        assertNull(cuis.chooseTravelDestination(o));
     }
 }
