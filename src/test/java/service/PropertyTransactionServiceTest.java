@@ -159,7 +159,7 @@ class PropertyTransactionServiceTest {
                 () -> assertTrue(pts.buyField(player1, field)),
                 () -> assertEquals(1, player1.getProperties().size()),
                 () -> assertEquals(4480000, player1.getBalance()),
-                () -> assertTrue(player1.getProperties().containsAll(List.of(field)))
+                () -> assertTrue(player1.getProperties().contains(field))
         );
     }
 
