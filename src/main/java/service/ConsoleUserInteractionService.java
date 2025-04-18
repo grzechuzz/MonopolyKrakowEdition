@@ -73,7 +73,20 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         return Math.max(0, Math.min(max, choice));
     }
 
+    @Override
+    public int chooseJailOption() {
+        io.displayMessage("JESTES W WIĘZIENIU! Wybierz opcję: ");
+        io.displayMessage("1) Wpłać 500 000 PLN, by wyjśc.");
+        io.displayMessage("2) Wyrzuć dublet");
+        io.displayMessage("3) Użyj karty wyjścia z więzienia");
+        io.displayMessage("Podaj wybór: ");
+        int choice = io.readInt();
 
+        if (!(choice >= 1 && choice <= 3))
+            choice = 2;
+
+        return choice;
+    }
 
     @Override
     public void displayMessage(String message) {

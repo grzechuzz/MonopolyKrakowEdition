@@ -11,5 +11,6 @@ public interface UserInteractionService {
     List<Ownable> propertiesToSell(Player player);
     PropertyField chooseFestivalField(Player player);
     int promptHouseCount(PropertyField field, int max);
+    int chooseJailOption();
     void displayMessage(String message);
 }
