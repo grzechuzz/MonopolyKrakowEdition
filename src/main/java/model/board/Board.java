@@ -19,6 +19,10 @@ public class Board {
         return fields.get(idx);
     }
 
+    public List<Field> getAllFields() {
+        return fields;
+    }
+
     private void initializeFields() {
         fields.add(new Field("START", 0, null));
         fields.add(new PropertyField("Teligi", 1, null, 240_000, 80_000));

@@ -6,6 +6,7 @@ public class PlayerStatus {
     private int consecutiveDoubles;
     private int laps;
     private boolean eliminated;
+    private boolean travel;
 
     public PlayerStatus() {
         this.jailExitCard = false;
@@ -53,5 +54,13 @@ public class PlayerStatus {
 
     public void setEliminated(boolean eliminated) {
         this.eliminated = eliminated;
+    }
+
+    public boolean canTravel() {
+        return travel;
+    }
+
+    public void setTravel(boolean travel) {
+        this.travel = travel;
     }
 }
