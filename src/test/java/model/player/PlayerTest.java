@@ -60,15 +60,17 @@ class PlayerTest {
     @Test
     void testDeleteProperty() {
         PropertyField pf = new PropertyField("PropertyField1", 0, new NoActionEffect(), 5, 2);
+        pf.setFestivalActive(true);
         ResortField rf = new ResortField("ResortField1", 1, new NoActionEffect(), 5, 2);
         player.addProperty(pf);
         player.addProperty(rf);
 
-        player.deleteProperty(rf);
+        player.deleteProperty(pf);
 
         assertAll(
                 () -> assertEquals(1, player.getProperties().size()),
-                () -> assertNull(rf.getOwner())
+                () -> assertNull(pf.getOwner()),
+                () -> assertFalse(pf.isFestivalActive())
         );
 
     }
