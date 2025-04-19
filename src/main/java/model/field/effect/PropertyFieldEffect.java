@@ -17,6 +17,7 @@ public class PropertyFieldEffect implements FieldEffect {
             gc.getPropertyTransactionService().buyField(player, field);
         } else if (field.getOwner() != player) {
             gc.getPropertyTransactionService().pay(player, field.getOwner(), field.calculateRent());
+            gc.getPropertyTransactionService().buyOpponentField(player, field.getOwner(), field);
         } else if (field.getOwner() == player && field.getHousesCount() < 3) {
             gc.getPropertyTransactionService().buildHouses(player, field);
         } else if (field.getOwner() == player && field.getHousesCount() == 3) {

@@ -125,7 +125,7 @@ public class PropertyTransactionService {
     }
 
     public boolean buyOpponentField(Player buyer, Player seller, PropertyField field) {
-        if (field.getOwner() != seller)
+        if (field.getOwner() != seller || field.hasHotel())
             return false;
 
         int buyoutPrice = (int)(field.calculateValue() * 1.5);
