@@ -1,6 +1,7 @@
 package model.player;
 
 import model.field.Ownable;
+import model.field.PropertyField;
 
 import java.util.ArrayList;
 import java.util.IllformedLocaleException;
@@ -64,6 +65,8 @@ public class Player {
     public void deleteProperty(Ownable field) {
         field.setOwner(null);
         properties.remove(field);
+        if (field instanceof PropertyField pf)
+            pf.setFestivalActive(false);
     }
 
     public PlayerStatus getStatus() {
