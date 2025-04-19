@@ -6,6 +6,6 @@ import model.player.Player;
 public class FestivalFieldEffect implements FieldEffect {
     @Override
     public void apply(Player player, GameContext gc) {
-
+        gc.getFestivalService().startFestival(player);
     }
 }
