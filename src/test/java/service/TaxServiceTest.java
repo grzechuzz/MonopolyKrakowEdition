@@ -27,9 +27,9 @@ class TaxServiceTest {
     @Test
     void testPayTax() {
         Player player = new Player("jaca");
-        PropertyField pf1 = new PropertyField("f1", 1, null, 200000, 100000);
-        PropertyField pf2 = new PropertyField("f2", 19, null, 300000, 120000);
-        PropertyField pf3 = new PropertyField("f3", 33, null, 330000, 130000);
+        PropertyField pf1 = new PropertyField("f1", 1, 200000, 100000);
+        PropertyField pf2 = new PropertyField("f2", 19, 300000, 120000);
+        PropertyField pf3 = new PropertyField("f3", 33, 330000, 130000);
         player.addProperty(pf1);
         player.addProperty(pf2);
         player.addProperty(pf3);
@@ -57,7 +57,7 @@ class TaxServiceTest {
     @Test
     void testPayTaxNoDisplayMessageWhenNotPaid() {
         Player player = new Player("goha");
-        PropertyField pf1 = new PropertyField("f1", 1, null, 2000000, 100000);
+        PropertyField pf1 = new PropertyField("f1", 1, 2000000, 100000);
         player.addProperty(pf1);
         pf1.setHotel(true);
         player.subtractBalance(5000000);

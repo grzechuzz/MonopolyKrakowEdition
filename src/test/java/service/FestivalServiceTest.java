@@ -28,7 +28,7 @@ class FestivalServiceTest {
     @Test
     void testStartFestivalShouldReturnTrue() {
         Player player = new Player("test");
-        PropertyField field = new PropertyField("pf1", 1, null, 50000, 9000);
+        PropertyField field = new PropertyField("pf1", 1, 50000, 9000);
         player.addProperty(field);
 
         when(ui.chooseFestivalField(player)).thenReturn(field);
@@ -50,8 +50,8 @@ class FestivalServiceTest {
     @Test
     void testStartFestivalShouldChangeFestivalField() {
         Player player = new Player("test");
-        PropertyField field = new PropertyField("pf1", 1, null, 50000, 9000);
-        PropertyField field2 = new PropertyField("pf2", 3, null, 70000, 11000);
+        PropertyField field = new PropertyField("pf1", 1, 50000, 9000);
+        PropertyField field2 = new PropertyField("pf2", 3, 70000, 11000);
         player.addProperty(field);
         player.addProperty(field2);
 

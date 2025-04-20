@@ -30,10 +30,10 @@ class TravelServiceTest {
 
     @Test
     void testTravelReturnsCorrectFieldPosition() {
-        PropertyField pf1 = new PropertyField("pf", 0, null, 30000, 15000);
-        PropertyField pf2 = new PropertyField("pf2", 1, null, 30000, 15000);
-        ResortField rf1 = new ResortField("rf", 2, null, 40000, 10000);
-        SpecialField sf1 = new SpecialField("sf", 3, null, 50000, 5000);
+        PropertyField pf1 = new PropertyField("pf", 0, 30000, 15000);
+        PropertyField pf2 = new PropertyField("pf2", 1, 30000, 15000);
+        ResortField rf1 = new ResortField("rf", 2, 40000, 10000);
+        SpecialField sf1 = new SpecialField("sf", 3, 50000, 5000);
         Player player = new Player("test1");
         Player player2 = new Player("test2");
         pf2.setOwner(player2);
@@ -63,10 +63,10 @@ class TravelServiceTest {
 
     @Test
     void testTravelWrongChoiceReturnsPlayerPosition() {
-        PropertyField pf1 = new PropertyField("pf", 0, null, 30000, 15000);
-        PropertyField pf2 = new PropertyField("pf2", 1, null, 30000, 15000);
-        ResortField rf1 = new ResortField("rf", 2, null, 40000, 10000);
-        SpecialField sf1 = new SpecialField("sf", 3, null, 50000, 5000);
+        PropertyField pf1 = new PropertyField("pf", 0, 30000, 15000);
+        PropertyField pf2 = new PropertyField("pf2", 1, 30000, 15000);
+        ResortField rf1 = new ResortField("rf", 2, 40000, 10000);
+        SpecialField sf1 = new SpecialField("sf", 3, 50000, 5000);
         Player player = new Player("test1");
         Player player2 = new Player("test2");
         pf2.setOwner(player2);

@@ -35,7 +35,7 @@ class PropertyTransactionServiceTest {
     void setUp() {
         player1 = new Player("grzechu");
         player2 = new Player("krzychu");
-        field = new PropertyField("Opolska", 18, null, 520000, 220000);
+        field = new PropertyField("Opolska", 18, 520000, 220000);
     }
 
     @Test
@@ -51,9 +51,9 @@ class PropertyTransactionServiceTest {
 
     @Test
     void testForceSellWithVariousFieldsSelected() {
-        PropertyField f1 = new PropertyField("Grodzka", 38, null, 900000, 450000);
-        ResortField f2 = new ResortField("Zakrzówek", 27, null, 600000, 100000);
-        SpecialField f3 = new SpecialField("Tauron Arena", 17, null, 750000, 80000);
+        PropertyField f1 = new PropertyField("Grodzka", 38, 900000, 450000);
+        ResortField f2 = new ResortField("Zakrzówek", 27, 600000, 100000);
+        SpecialField f3 = new SpecialField("Tauron Arena", 17, 750000, 80000);
         f1.setHousesCount(2);
         player1.addProperty(f1);
         player1.addProperty(f2);
@@ -76,9 +76,9 @@ class PropertyTransactionServiceTest {
 
     @Test
     void testForceSellWithNoFieldsSelected() {
-        PropertyField f1 = new PropertyField("Grodzka", 38, null, 900000, 450000);
-        ResortField f2 = new ResortField("Zakrzówek", 27, null, 600000, 100000);
-        SpecialField f3 = new SpecialField("Tauron Arena", 17, null, 750000, 80000);
+        PropertyField f1 = new PropertyField("Grodzka", 38, 900000, 450000);
+        ResortField f2 = new ResortField("Zakrzówek", 27, 600000, 100000);
+        SpecialField f3 = new SpecialField("Tauron Arena", 17, 750000, 80000);
         f1.setHousesCount(2);
         player1.addProperty(f1);
         player1.addProperty(f2);
@@ -108,7 +108,7 @@ class PropertyTransactionServiceTest {
 
     @Test
     void testPayPlayerHasEnoughMoneyWithForceSell() {
-        PropertyField f = new PropertyField("Grodzka", 38, null, 900000, 450000);
+        PropertyField f = new PropertyField("Grodzka", 38, 900000, 450000);
         f.setHotel(true);
         player1.addProperty(f);
         when(ui.propertiesToSell(player1)).thenReturn(List.of(f));
@@ -142,7 +142,7 @@ class PropertyTransactionServiceTest {
 
     @Test
     void testPayToBankPlayerHasNotEnoughMoney() {
-        SpecialField f = new SpecialField("Tauron Arena", 17, null, 750000, 80000);
+        SpecialField f = new SpecialField("Tauron Arena", 17, 750000, 80000);
         player1.addProperty(f);
         when(ui.propertiesToSell(player1)).thenReturn(List.of(f));
 
@@ -179,9 +179,9 @@ class PropertyTransactionServiceTest {
 
     @Test
     void testBuyFieldsWithEnoughMoneyToBuy() {
-        PropertyField f1 = new PropertyField("Grodzka", 38, null, 900000, 450000);
-        ResortField f2 = new ResortField("Zakrzówek", 27, null, 600000, 100000);
-        SpecialField f3 = new SpecialField("Tauron Arena", 17, null, 750000, 80000);
+        PropertyField f1 = new PropertyField("Grodzka", 38, 900000, 450000);
+        ResortField f2 = new ResortField("Zakrzówek", 27, 600000, 100000);
+        SpecialField f3 = new SpecialField("Tauron Arena", 17, 750000, 80000);
 
         when(ui.confirmPurchase(f1.getName(), f1.getPrice())).thenReturn(true);
         when(ui.confirmPurchase(f2.getName(), f2.getPrice())).thenReturn(false);

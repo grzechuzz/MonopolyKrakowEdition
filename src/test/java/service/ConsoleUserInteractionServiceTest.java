@@ -33,8 +33,8 @@ public class ConsoleUserInteractionServiceTest {
     @BeforeEach
     void setUp() {
         player = new Player("krzychu");
-        pf = new PropertyField("test", 0, null, 50000, 20000);
-        rf = new ResortField("Resort", 2, null, 100000, 30000);
+        pf = new PropertyField("test", 0, 50000, 20000);
+        rf = new ResortField("Resort", 2, 100000, 30000);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class ConsoleUserInteractionServiceTest {
 
     @Test
     void testChooseFestivalField() {
-        PropertyField pf2 = new PropertyField("test2", 1, null, 55000, 23000);
+        PropertyField pf2 = new PropertyField("test2", 1, 55000, 23000);
         player.addProperty(pf);
         player.addProperty(pf2);
         player.addProperty(rf);
@@ -59,7 +59,7 @@ public class ConsoleUserInteractionServiceTest {
 
     @Test
     void testChooseFestivalFieldChooseWrongIndex() {
-        PropertyField pf2 = new PropertyField("test2", 1, null, 55000, 23000);
+        PropertyField pf2 = new PropertyField("test2", 1, 55000, 23000);
         player.addProperty(pf);
         player.addProperty(pf2);
         player.addProperty(rf);
@@ -112,8 +112,8 @@ public class ConsoleUserInteractionServiceTest {
 
     @Test
     void testChooseTravelDestinationReturnCorrectField() {
-        PropertyField pf2 = new PropertyField("test2", 4, null, 50000, 20000);
-        ResortField rf2 = new ResortField("Resort2", 9, null, 100000, 30000);
+        PropertyField pf2 = new PropertyField("test2", 4, 50000, 20000);
+        ResortField rf2 = new ResortField("Resort2", 9, 100000, 30000);
         List<Ownable> o = new ArrayList<>(List.of(pf, pf2, rf, rf2));
         when(io.readInt()).thenReturn(3);
 

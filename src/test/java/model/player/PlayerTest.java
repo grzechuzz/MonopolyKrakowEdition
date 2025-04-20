@@ -1,7 +1,6 @@
 package model.player;
 
 import model.field.*;
-import model.field.effect.NoActionEffect;
 import model.field.PropertyField;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,8 +45,8 @@ class PlayerTest {
 
     @Test
     void testAddProperty() {
-        player.addProperty(new PropertyField("PropertyField1", 0, new NoActionEffect(), 5, 2));
-        player.addProperty(new ResortField("ResortField1", 1, new NoActionEffect(), 5, 2));
+        player.addProperty(new PropertyField("PropertyField1", 0, 5, 2));
+        player.addProperty(new ResortField("ResortField1", 1, 5, 2));
 
         assertAll(
                 () -> assertEquals(2, player.getProperties().size()),
@@ -59,9 +58,9 @@ class PlayerTest {
 
     @Test
     void testDeleteProperty() {
-        PropertyField pf = new PropertyField("PropertyField1", 0, new NoActionEffect(), 5, 2);
+        PropertyField pf = new PropertyField("PropertyField1", 0, 5, 2);
         pf.setFestivalActive(true);
-        ResortField rf = new ResortField("ResortField1", 1, new NoActionEffect(), 5, 2);
+        ResortField rf = new ResortField("ResortField1", 1, 5, 2);
         player.addProperty(pf);
         player.addProperty(rf);
 
