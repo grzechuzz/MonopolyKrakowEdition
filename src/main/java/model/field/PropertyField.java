@@ -1,5 +1,6 @@
 package model.field;
 
+import game.GameContext;
 import model.field.effect.FieldEffect;
 import model.player.Player;
 
@@ -11,8 +12,8 @@ public class PropertyField extends Field implements Ownable {
     private boolean hotel;
     private boolean festivalActive;
 
-    public PropertyField(String name, int position, FieldEffect fe, int basePrice, int baseRent) {
-        super(name, position, fe);
+    public PropertyField(String name, int position, int basePrice, int baseRent) {
+        super(name, position);
         this.basePrice = basePrice;
         this.baseRent = baseRent;
         this.housesCount = 0;
@@ -61,12 +62,18 @@ public class PropertyField extends Field implements Ownable {
 
     @Override
     public int calculateRent() {
+        int rent;
         if (housesCount > 0 && !hotel)
-            return baseRent * housesCount;
+            rent = baseRent * housesCount;
         else if (housesCount == 0 && !hotel)
-            return baseRent / 4;
+            rent = baseRent / 4;
         else
-            return baseRent * 6;
+            rent = baseRent * 6;
+
+        if (festivalActive)
+            rent *= 2;
+
+        return rent;
     }
 
     @Override
@@ -85,5 +92,19 @@ public class PropertyField extends Field implements Ownable {
         housesCount = 0;
         hotel = false;
         festivalActive = false;
+    }
+
+    @Override
+    public void executeEffect(Player player, GameContext gc) {
+        if (owner == null) {
+            gc.getPropertyTransactionService().buyField(player, this);
+        } else if (owner != player) {
+            gc.getPropertyTransactionService().pay(player, owner, calculateRent());
+            gc.getPropertyTransactionService().buyOpponentField(player, owner, this);
+        } else if (housesCount < 3) {
+            gc.getPropertyTransactionService().buildHouses(player, this);
+        } else if (housesCount == 3) {
+            gc.getPropertyTransactionService().upgradeToHotel(player, this);
+        }
     }
 }

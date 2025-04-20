@@ -1,19 +1,15 @@
 package model.field;
 
-import model.field.effect.FieldEffect;
-import model.field.effect.NoActionEffect;
 import model.player.Player;
 import game.GameContext;
 
-public class Field {
+public abstract class Field {
     private final String name;
     private final int position;
-    private final FieldEffect effect;
 
-    public Field(String name, int position, FieldEffect effect) {
+    public Field(String name, int position) {
         this.name = name;
         this.position = position;
-        this.effect = effect != null ? effect : new NoActionEffect();
     }
 
     public String getName() {
@@ -24,7 +20,5 @@ public class Field {
         return position;
     }
 
-    public void executeEffect(Player player, GameContext gc) {
-        effect.apply(player, gc);
-    }
+    public abstract void executeEffect(Player player, GameContext gc);
 }

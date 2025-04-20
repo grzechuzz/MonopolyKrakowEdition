@@ -1,6 +1,6 @@
 package model.field;
 
-import model.field.effect.FieldEffect;
+import game.GameContext;
 import model.player.Player;
 
 public class ResortField extends Field implements Ownable {
@@ -8,8 +8,8 @@ public class ResortField extends Field implements Ownable {
     private final int basePrice;
     private final int baseRent;
 
-    public ResortField(String name, int position, FieldEffect fe, int basePrice, int baseRent) {
-        super(name, position, fe);
+    public ResortField(String name, int position, int basePrice, int baseRent) {
+        super(name, position);
         this.basePrice = basePrice;
         this.baseRent = baseRent;
     }
@@ -42,5 +42,14 @@ public class ResortField extends Field implements Ownable {
     @Override
     public void cleanUp() {
         owner = null;
+    }
+
+    @Override
+    public void executeEffect(Player player, GameContext gc) {
+        if (owner == null) {
+            gc.getPropertyTransactionService().buyField(player, this);
+        } else if (owner != player) {
+            gc.getPropertyTransactionService().pay(player, owner, calculateRent());
+        }
     }
 }
