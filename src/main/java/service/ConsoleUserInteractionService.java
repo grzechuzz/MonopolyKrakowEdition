@@ -21,6 +21,11 @@ public class ConsoleUserInteractionService implements UserInteractionService {
     }
 
     @Override
+    public boolean confirmHotelUpgrade(PropertyField field, int price) {
+        return io.askYesNo("Zamienić 3 domy na HOTEL na polu " + field.getName() + " za " + price + " PLN?");
+    }
+
+    @Override
     public List<Ownable> propertiesToSell(Player player) {
         io.displayMessage("Wybierz nieruchomości do sprzedaży.");
         List<Ownable> properties = player.getProperties();
@@ -136,7 +141,6 @@ public class ConsoleUserInteractionService implements UserInteractionService {
                 int rent = pf.calculateRent();
                 sb.append(" | czynsz: ").append(rent).append(" PLN");
 
-                // info o odkupieniu
                 if (pf.getOwner() != null && !pf.hasHotel()) {
                     int buyout = (int)(pf.calculateValue() * 1.5);
                     sb.append(" | odkup: ").append(buyout).append(" PLN");

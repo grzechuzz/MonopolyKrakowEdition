@@ -118,6 +118,9 @@ public class PropertyTransactionService {
             return false;
         }
 
+        if (!ui.confirmHotelUpgrade(field, totalCost))
+            return false;
+
         player.subtractBalance(totalCost);
         field.setHousesCount(0);
         field.setHotel(true);
@@ -136,7 +139,6 @@ public class PropertyTransactionService {
         boolean confirm = ui.confirmPurchase(field.getName(), buyoutPrice);
         if (!confirm)
             return false;
-
 
         buyer.subtractBalance(buyoutPrice);
         seller.addBalance(buyoutPrice);
