@@ -23,6 +23,13 @@ public class VictoryChecker {
             Set.of(36, 38, 39)
     );
 
+    private static final Set<Set<Integer>> wall_sets = Set.of(
+            Set.of(1, 2, 3, 6, 8, 9),
+            Set.of(11, 13, 14, 16, 18, 19),
+            Set.of(21, 23, 24, 26, 28, 29),
+            Set.of(31, 32, 34, 36, 38, 39)
+    );
+
     private boolean winByMonopolies(Player player) {
         List<Ownable> properties = player.getProperties();
         List<Integer> owned = new ArrayList<>();
@@ -47,6 +54,29 @@ public class VictoryChecker {
         return count >= 3;
     }
 
+    private boolean winByWall(Player player) {
+        List<Ownable> properties = player.getProperties();
+        List<Integer> owned = new ArrayList<>();
+
+        for (Ownable field : properties) {
+            if (field instanceof PropertyField)
+                owned.add(((Field)field).getPosition());
+        }
+
+        for (Set<Integer> wall : wall_sets) {
+            boolean hasAll = true;
+            for (Integer position : wall) {
+                if (!owned.contains(position)) {
+                    hasAll = false;
+                    break;
+                }
+            }
+            if (hasAll)
+                return true;
+        }
+        return false;
+    }
+
     private boolean winByResorts(Player player) {
         int count = 0;
         for (Ownable field : player.getProperties()) {
@@ -66,6 +96,6 @@ public class VictoryChecker {
     }
 
     public boolean checkVictory(Player player, List<Player> players) {
-        return winByMonopolies(player) || winByResorts(player) || winByBankruptcy(players);
+        return winByMonopolies(player) || winByResorts(player) || winByBankruptcy(players) || winByWall(player);
     }
 }
