@@ -71,6 +71,7 @@ class PropertyFieldTest {
         field.executeEffect(a, gc);
 
         verify(pts).buyField(a, field);
+        verify(pts).buildHouses(a, field);
     }
 
     @Test
