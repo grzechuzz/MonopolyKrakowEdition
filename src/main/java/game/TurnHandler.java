@@ -23,10 +23,13 @@ public class TurnHandler {
 
         player.setPosition(newPosition);
         Field field = gameContext.getBoard().getField(newPosition);
+        gameContext.getUserInteractionService().showFieldInfo(field);
         field.executeEffect(player, gameContext);
     }
 
     public void executeTurn(Player player) {
+        gameContext.getUserInteractionService().showPlayerStatus(player);
+
         JailOutcome outcome = null;
         int diceResult = 0;
         int newPosition = -1;
@@ -49,6 +52,8 @@ public class TurnHandler {
         if (!(newPosition != -1 || diceResult > 0)) {
             gameContext.getDice().roll();
             diceResult = gameContext.getDice().sum();
+
+            System.out.println(gameContext.getDice().toString());
 
             if (gameContext.getDice().isDouble()) {
                 player.getStatus().setConsecutiveDoubles(player.getStatus().getConsecutiveDoubles() + 1);

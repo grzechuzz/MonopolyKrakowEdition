@@ -1,10 +1,8 @@
 package service;
 
 import io.GameIO;
-import model.field.Field;
-import model.field.Ownable;
-import model.field.PropertyField;
 import model.player.Player;
+import model.field.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +107,7 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         io.displayMessage(message);
     }
 
+    @Override
     public void showPlayerStatus(Player p) {
         String props = p.getProperties().stream()
                 .map(Ownable::getName)
@@ -118,4 +117,42 @@ public class ConsoleUserInteractionService implements UserInteractionService {
                 props.isEmpty() ? "—" : props));
     }
 
+    @Override
+    public void showFieldInfo(Field field) {
+        StringBuilder sb = new StringBuilder("➜ Pole: " + field.getName());
+
+        if (field instanceof PropertyField pf) {
+            if (pf.getOwner() == null) {
+                sb.append(" | wolne | cena: ").append(pf.getPrice()).append(" PLN");
+            } else {
+                sb.append(" | właściciel: ").append(pf.getOwner().getNickname());
+
+                if (pf.hasHotel()) {
+                    sb.append(" | HOTEL");
+                } else {
+                    sb.append(" | domy: ").append(pf.getHousesCount());
+                }
+
+                int rent = pf.calculateRent();
+                sb.append(" | czynsz: ").append(rent).append(" PLN");
+
+                // info o odkupieniu
+                if (pf.getOwner() != null && !pf.hasHotel()) {
+                    int buyout = (int)(pf.calculateValue() * 1.5);
+                    sb.append(" | odkup: ").append(buyout).append(" PLN");
+                }
+
+                if (pf.isFestivalActive()) {
+                    sb.append(" | FESTIWAL x2");
+                }
+            }
+        } else if (field instanceof ResortField rf) {
+            sb.append(" | ośrodek | cena: ").append(rf.getPrice())
+                    .append(" | czynsz: ").append(rf.calculateRent());
+        } else if (field instanceof SpecialField sf) {
+            sb.append(" | specjalne | cena: ").append(sf.getPrice())
+                    .append(" | czynsz: ").append(sf.calculateRent());
+        }
+        io.displayMessage(sb.toString());
+    }
 }

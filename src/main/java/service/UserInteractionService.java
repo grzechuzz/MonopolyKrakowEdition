@@ -1,5 +1,6 @@
 package service;
 
+import model.field.Field;
 import model.field.Ownable;
 import model.field.PropertyField;
 import model.player.Player;
@@ -14,4 +15,8 @@ public interface UserInteractionService {
     int promptHouseCount(PropertyField field, int max);
     int chooseJailOption();
     void displayMessage(String message);
+
+    void showPlayerStatus(Player p);
+
+    void showFieldInfo(Field field);
 }
