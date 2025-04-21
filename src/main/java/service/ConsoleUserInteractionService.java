@@ -8,6 +8,7 @@ import model.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConsoleUserInteractionService implements UserInteractionService {
     private final GameIO io;
@@ -107,4 +108,14 @@ public class ConsoleUserInteractionService implements UserInteractionService {
     public void displayMessage(String message) {
         io.displayMessage(message);
     }
+
+    public void showPlayerStatus(Player p) {
+        String props = p.getProperties().stream()
+                .map(Ownable::getName)
+                .collect(Collectors.joining(", "));
+        displayMessage(String.format("[%s] $%,d | pole %d | nieruchomości: %s",
+                p.getNickname(), p.getBalance(), p.getPosition(),
+                props.isEmpty() ? "—" : props));
+    }
+
 }
