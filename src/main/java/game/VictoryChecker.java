@@ -23,7 +23,7 @@ public class VictoryChecker {
             Set.of(36, 38, 39)
     );
 
-    public boolean winByMonopolies(Player player) {
+    private boolean winByMonopolies(Player player) {
         List<Ownable> properties = player.getProperties();
         List<Integer> owned = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class VictoryChecker {
         return count >= 3;
     }
 
-    public boolean winByResorts(Player player) {
+    private boolean winByResorts(Player player) {
         int count = 0;
         for (Ownable field : player.getProperties()) {
             if (field instanceof ResortField)
@@ -56,7 +56,7 @@ public class VictoryChecker {
         return count >= 4;
     }
 
-    public boolean winByBankruptcy(List<Player> players) {
+    private boolean winByBankruptcy(List<Player> players) {
         int count = 0;
         for (Player player : players) {
             if (!player.getStatus().isEliminated())
