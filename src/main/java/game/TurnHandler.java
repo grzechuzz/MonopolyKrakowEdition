@@ -1,7 +1,5 @@
 package game;
 
-import model.board.Board;
-import model.dice.Dice;
 import model.field.Field;
 import model.jail.JailOutcome;
 import model.jail.RemainInJail;
@@ -10,13 +8,9 @@ import model.player.Player;
 
 
 public class TurnHandler {
-    private final Dice dice;
-    private final Board board;
     private final GameContext gameContext;
 
-    public TurnHandler(GameContext gameContext, Dice dice, Board board) {
-        this.dice = dice;
-        this.board = board;
+    public TurnHandler(GameContext gameContext) {
         this.gameContext = gameContext;
     }
 
@@ -28,7 +22,7 @@ public class TurnHandler {
         }
 
         player.setPosition(newPosition);
-        Field field = board.getField(newPosition);
+        Field field = gameContext.getBoard().getField(newPosition);
         field.executeEffect(player, gameContext);
     }
 
@@ -53,10 +47,10 @@ public class TurnHandler {
         }
 
         if (!(newPosition != -1 || diceResult > 0)) {
-            dice.roll();
-            diceResult = dice.sum();
+            gameContext.getDice().roll();
+            diceResult = gameContext.getDice().sum();
 
-            if (dice.isDouble()) {
+            if (gameContext.getDice().isDouble()) {
                 player.getStatus().setConsecutiveDoubles(player.getStatus().getConsecutiveDoubles() + 1);
                 if (player.getStatus().getConsecutiveDoubles() >= 3) {
                     gameContext.getJailService().sendToJail(player);
@@ -68,7 +62,7 @@ public class TurnHandler {
             }
         }
 
-        newPosition = (oldPosition + diceResult) % board.getAllFields().size();
+        newPosition = (oldPosition + diceResult) % gameContext.getBoard().getAllFields().size();
 
         movePlayer(player, oldPosition, newPosition);
     }

@@ -1,7 +1,6 @@
 package model.field;
 
 import game.GameContext;
-import model.field.effect.FieldEffect;
 import model.player.Player;
 
 public class PropertyField extends Field implements Ownable {
@@ -101,9 +100,9 @@ public class PropertyField extends Field implements Ownable {
         } else if (owner != player) {
             gc.getPropertyTransactionService().pay(player, owner, calculateRent());
             gc.getPropertyTransactionService().buyOpponentField(player, owner, this);
-        } else if (housesCount < 3) {
+        } else if (housesCount < 3 && !hasHotel()) {
             gc.getPropertyTransactionService().buildHouses(player, this);
-        } else if (housesCount == 3) {
+        } else if (housesCount == 3 && !hasHotel()) {
             gc.getPropertyTransactionService().upgradeToHotel(player, this);
         }
     }
