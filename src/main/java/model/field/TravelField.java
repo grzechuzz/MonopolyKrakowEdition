@@ -12,5 +12,6 @@ public class TravelField extends Field {
     @Override
     public void executeEffect(Player player, GameContext gc) {
         player.getStatus().setTravel(true);
+        player.getStatus().setConsecutiveDoubles(0);
     }
 }
