@@ -12,7 +12,7 @@ public class ChanceField extends Field {
     @Override
     public void executeEffect(Player player, GameContext gc) {
         ChanceCard chance = gc.getCardService().draw();
-        gc.getUserInteractionService().displayMessage(chance.getDescription());
+        gc.getUserInteractionService().displayMessage("SZANSA: " + chance.getDescription());
         chance.apply(player, gc);
     }
 }
