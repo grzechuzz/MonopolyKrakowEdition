@@ -1,17 +1,18 @@
 package app;
 
-import game.GameEngine;
-import game.GameContext;
+
 import io.GameIO;
 import service.*;
-import io.ConsoleIO;
+import io.*;
 import model.dice.Dice;
 import model.board.Board;
 import model.chance.*;
-import java.util.List;
-import game.*;
-import java.util.Random;
 import model.player.Player;
+import game.*;
+
+import java.util.List;
+import java.util.Random;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -37,13 +38,12 @@ public class Main {
         );
         CardService cards = new CardService(deck, new Random());
 
-        List<Player> players = List.of(new Player("Ada"), new Player("Bartek"));
-
+        List<Player> players = List.of(new Player("Grzech"),
+                                       new Player("Goha"),
+                                       new Player("Jaca"),
+                                       new Player("Kox"));
         GameContext ctx = new GameContext.Builder()
-                .pts(pts).ui(ui).tax(tax).jail(jail)
-                .travel(travel).festival(fest).card(cards)
-                .board(board).dice(dice).players(players)
-                .build();
+                .pts(pts).ui(ui).tax(tax).jail(jail).travel(travel).festival(fest).card(cards).board(board).dice(dice).players(players).build();
 
         TurnHandler th = new TurnHandler(ctx);
         VictoryChecker vc = new VictoryChecker();
