@@ -9,7 +9,7 @@ public class FestivalService {
     private final UserInteractionService ui;
     private PropertyField activeFestival;
 
-    public FestivalService(UserInteractionService ui, Board board) {
+    public FestivalService(UserInteractionService ui) {
         this.ui = ui;
     }
 
