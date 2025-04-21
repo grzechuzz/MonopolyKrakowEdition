@@ -42,8 +42,9 @@ public class TurnHandler {
                 return;
         }
 
-        if (outcome instanceof RolledDouble)
+        if (outcome instanceof RolledDouble) {
             diceResult = ((RolledDouble) outcome).getSum();
+        }
 
         if (player.getStatus().canTravel()) {
             newPosition = gameContext.getTravelService().travel(player);
@@ -67,7 +68,8 @@ public class TurnHandler {
             }
         }
 
-        newPosition = (oldPosition + diceResult) % gameContext.getBoard().getAllFields().size();
+        if (newPosition == -1)
+            newPosition = (oldPosition + diceResult) % gameContext.getBoard().getAllFields().size();
 
         movePlayer(player, oldPosition, newPosition);
     }

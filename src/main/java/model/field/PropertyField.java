@@ -97,6 +97,7 @@ public class PropertyField extends Field implements Ownable {
     public void executeEffect(Player player, GameContext gc) {
         if (owner == null) {
             gc.getPropertyTransactionService().buyField(player, this);
+            gc.getPropertyTransactionService().buildHouses(player, this);
         } else if (owner != player) {
             gc.getPropertyTransactionService().pay(player, owner, calculateRent());
             gc.getPropertyTransactionService().buyOpponentField(player, owner, this);

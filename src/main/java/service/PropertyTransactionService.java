@@ -37,7 +37,8 @@ public class PropertyTransactionService {
 
     public boolean pay(Player from, Player to, int amount) {
         if (from.getBalance() < amount) {
-            forceSell(from);
+            while (from.getBalance() < amount && !from.getProperties().isEmpty())
+                forceSell(from);
             if (from.getBalance() < amount) {
                 to.addBalance(from.getBalance());
                 bankruptPlayer(from);
@@ -52,7 +53,8 @@ public class PropertyTransactionService {
 
     public boolean payToBank(Player player, int amount) {
         if (player.getBalance() < amount) {
-            forceSell(player);
+            while (player.getBalance() < amount && !player.getProperties().isEmpty())
+                forceSell(player);
             if (player.getBalance() < amount) {
                 bankruptPlayer(player);
                 return false;
