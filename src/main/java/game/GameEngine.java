@@ -18,26 +18,26 @@ public class GameEngine {
 
     public void runGame() {
         List<Player> players = gameContext.getPlayers();
-        while (true) {
+        while (players.size() > 1) {
             Player p = players.get(currentPlayer);
 
-            if (!p.getStatus().isEliminated()) {
-                turnHandler.executeTurn(p);
-                if (p.getStatus().isEliminated()) {
-                    players.remove(currentPlayer);
-                } else {
-                    if (victoryChecker.checkVictory(p, players)) {
-                        break;
-                    } else if (p.getStatus().getConsecutiveDoubles() == 0) {
-                        currentPlayer = (currentPlayer + 1) % players.size();
-                    }
-                }
-            } else {
-                players.remove(currentPlayer);
-            }
+          if (p.getStatus().isEliminated()) {
+              players.remove(currentPlayer);
+              continue;
+          }
+
+          turnHandler.executeTurn(p);
+
+          if (p.getStatus().isEliminated()) {
+              players.remove(currentPlayer);
+          } else if (victoryChecker.checkVictory(p, players)) {
+              break;
+          } else if(p.getStatus().getConsecutiveDoubles() == 0) {
+              currentPlayer = (currentPlayer + 1) % players.size();
+          }
         }
+
         Player winner = players.get(0);
         gameContext.getUserInteractionService().displayMessage("Koniec gry! Zwycięzca: " + winner.getNickname());
-
     }
 }
