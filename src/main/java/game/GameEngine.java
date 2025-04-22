@@ -25,6 +25,9 @@ public class GameEngine {
 
           if (p.getStatus().isEliminated()) {
               players.remove(currentPlayer);
+              if (currentPlayer >= players.size())
+                  currentPlayer = 0;
+
               continue;
           }
 
@@ -32,6 +35,8 @@ public class GameEngine {
 
           if (p.getStatus().isEliminated()) {
               players.remove(currentPlayer);
+              if (currentPlayer >= players.size())
+                  currentPlayer = 0;
           } else if (victoryChecker.checkVictory(p, players)) {
               break;
           } else if(p.getStatus().getConsecutiveDoubles() == 0) {
