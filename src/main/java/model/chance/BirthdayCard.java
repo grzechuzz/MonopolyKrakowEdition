@@ -12,6 +12,7 @@ public class BirthdayCard implements ChanceCard {
     @Override
     public void apply(Player player, GameContext gc) {
         for (Player p : gc.getPlayers())
-            gc.getPropertyTransactionService().pay(p, player, 60000);
+            if (p != player)
+                gc.getPropertyTransactionService().pay(p, player, 60000);
     }
 }
