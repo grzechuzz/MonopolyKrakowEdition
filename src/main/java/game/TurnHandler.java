@@ -1,6 +1,5 @@
 package game;
 
-import model.field.Field;
 import model.jail.JailOutcome;
 import model.jail.RemainInJail;
 import model.jail.RolledDouble;
@@ -14,53 +13,37 @@ public class TurnHandler {
         this.gameContext = gameContext;
     }
 
-    public void movePlayer(Player player, int oldPosition, int newPosition) {
-        if (newPosition < oldPosition) {
-            player.addBalance(500000);
-            player.getStatus().setLaps(player.getStatus().getLaps() + 1);
-            gameContext.getUserInteractionService().displayMessage("Przekroczono START, bonus 500000 PLN!");
-        }
-
-        player.setPosition(newPosition);
-        Field field = gameContext.getBoard().getField(newPosition);
-        gameContext.getUserInteractionService().showFieldInfo(field);
-        field.executeEffect(player, gameContext);
-    }
-
     public void executeTurn(Player player) {
         gameContext.getUserInteractionService().showPlayerStatus(player);
 
         JailOutcome outcome = null;
-        int diceResult = 0;
-        int newPosition = -1;
-        int oldPosition = player.getPosition();
-
         if (player.getStatus().getJailRounds() > 0) {
             outcome = gameContext.getJailService().handleJailedPlayer(player);
-
             if (outcome instanceof RemainInJail)
                 return;
         }
 
-        if (outcome instanceof RolledDouble) {
-            diceResult = ((RolledDouble) outcome).getSum();
+        int diceResult = 0;
+        if (outcome instanceof RolledDouble rd) {
+            diceResult = rd.getSum();
         }
 
         if (player.getStatus().canTravel()) {
-            newPosition = gameContext.getTravelService().travel(player);
+            int target = gameContext.getTravelService().travel(player);
+            gameContext.getMovementService().moveTo(player, target);
+            return;
         }
 
-        if (!(newPosition != -1 || diceResult > 0)) {
+        if (diceResult == 0) {
             gameContext.getDice().roll();
             diceResult = gameContext.getDice().sum();
-
-            System.out.println(gameContext.getDice().toString());
+            gameContext.getUserInteractionService().displayMessage(gameContext.getDice().toString());
 
             if (gameContext.getDice().isDouble()) {
                 player.getStatus().setConsecutiveDoubles(player.getStatus().getConsecutiveDoubles() + 1);
                 if (player.getStatus().getConsecutiveDoubles() >= 3) {
                     gameContext.getJailService().sendToJail(player);
-                    gameContext.getUserInteractionService().displayMessage("Trzeci dublet z rzędu, idziesz do więzienia.");
+                    gameContext.getUserInteractionService().displayMessage("Trzeci dublet z rzędu - idziesz do więzienia");
                     return;
                 }
             } else {
@@ -68,9 +51,6 @@ public class TurnHandler {
             }
         }
 
-        if (newPosition == -1)
-            newPosition = (oldPosition + diceResult) % gameContext.getBoard().getAllFields().size();
-
-        movePlayer(player, oldPosition, newPosition);
+        gameContext.getMovementService().moveBySteps(player, diceResult);
     }
 }
