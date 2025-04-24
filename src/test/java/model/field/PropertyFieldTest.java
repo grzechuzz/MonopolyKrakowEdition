@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import service.PropertyTransactionService;
+import utils.Rules;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -31,19 +32,19 @@ class PropertyFieldTest {
 
     @Test
     void testCalculateRentNoHousesNoHotel() {
-        assertEquals(112500, field.calculateRent());
+        assertEquals(450000 * Rules.RENT_EMPTY_FIELD_FACTOR, field.calculateRent());
     }
 
     @Test
     void testCalculateRentWithHouses() {
         field.setHousesCount(3);
-        assertEquals(1350000, field.calculateRent());
+        assertEquals(450000 * Rules.RENT_HOUSE_MULTIPLIER * field.getHousesCount(), field.calculateRent());
     }
 
     @Test
     void testCalculateRentWithHotel() {
         field.setHotel(true);
-        assertEquals(2700000, field.calculateRent());
+        assertEquals(450000 * Rules.RENT_HOTEL_MULTIPLIER, field.calculateRent());
     }
 
     @Test
@@ -54,13 +55,13 @@ class PropertyFieldTest {
     @Test
     void testCalculateValueWithHouses() {
         field.setHousesCount(2);
-        assertEquals(1800000, field.calculateValue());
+        assertEquals(900000 * Rules.BUILD_HOUSE_COST_FACTOR * field.getHousesCount() + 900000, field.calculateValue());
     }
 
     @Test
     void testCalculateValueWithHotel() {
         field.setHotel(true);
-        assertEquals(2700000, field.calculateValue());
+        assertEquals(900000 * 2 * Rules.BUILD_HOTEL_COST_FACTOR, field.calculateValue());
     }
 
     @Test

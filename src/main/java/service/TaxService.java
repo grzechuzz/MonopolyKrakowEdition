@@ -2,6 +2,7 @@ package service;
 
 import model.field.Ownable;
 import model.player.Player;
+import utils.Rules;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class TaxService {
         for (Ownable o : fields)
             toPay += o.calculateValue();
 
-        int tax = (int)(toPay * 0.1);
+        int tax = (int)(toPay * Rules.TAX_RATE);
 
         boolean paid = pts.payToBank(player, tax);
         if (paid)

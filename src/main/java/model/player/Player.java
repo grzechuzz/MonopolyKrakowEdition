@@ -2,9 +2,9 @@ package model.player;
 
 import model.field.Ownable;
 import model.field.PropertyField;
+import utils.Rules;
 
 import java.util.ArrayList;
-import java.util.IllformedLocaleException;
 import java.util.List;
 
 
@@ -18,7 +18,7 @@ public class Player {
     public Player(String nickname) {
         this.nickname = nickname;
         position = 0;
-        balance = 5000000;
+        balance = Rules.START_BALANCE;
         properties = new ArrayList<>();
         status = new PlayerStatus();
     }

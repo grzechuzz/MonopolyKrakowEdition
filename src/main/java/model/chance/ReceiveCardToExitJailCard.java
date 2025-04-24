@@ -3,7 +3,7 @@ package model.chance;
 import game.GameContext;
 import model.player.Player;
 
-public class RecieveCardToExitJailCard implements ChanceCard {
+public class ReceiveCardToExitJailCard implements ChanceCard {
     @Override
     public String getDescription() {
         return "Otrzymujesz kartę: 'Wyjdź z więzienia'";

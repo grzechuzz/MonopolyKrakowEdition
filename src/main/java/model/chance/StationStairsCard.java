@@ -2,6 +2,7 @@ package model.chance;
 
 import game.GameContext;
 import model.player.Player;
+import utils.Rules;
 
 public class StationStairsCard implements ChanceCard {
     @Override
@@ -12,6 +13,6 @@ public class StationStairsCard implements ChanceCard {
 
     @Override
     public void apply(Player player, GameContext gc) {
-        player.addBalance(300000);
+        player.addBalance(Rules.CARD_STAIRS_REWARD);
     }
 }
