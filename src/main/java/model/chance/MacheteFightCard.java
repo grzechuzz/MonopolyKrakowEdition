@@ -1,7 +1,6 @@
 package model.chance;
 
 import game.GameContext;
-import game.TurnHandler;
 import model.player.Player;
 
 public class MacheteFightCard implements ChanceCard {
@@ -13,7 +12,7 @@ public class MacheteFightCard implements ChanceCard {
 
     @Override
     public void apply(Player player, GameContext gc) {
-        TurnHandler th = new TurnHandler(gc);
-        th.movePlayer(player, player.getPosition(), 25);
+        gc.getPropertyTransactionService().payToBank(player, 50000);
+        gc.getMovementService().moveTo(player, 25);
     }
 }
