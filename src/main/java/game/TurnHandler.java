@@ -4,6 +4,7 @@ import model.jail.JailOutcome;
 import model.jail.RemainInJail;
 import model.jail.RolledDouble;
 import model.player.Player;
+import utils.Rules;
 
 
 public class TurnHandler {
@@ -41,7 +42,7 @@ public class TurnHandler {
 
             if (gameContext.getDice().isDouble()) {
                 player.getStatus().setConsecutiveDoubles(player.getStatus().getConsecutiveDoubles() + 1);
-                if (player.getStatus().getConsecutiveDoubles() >= 3) {
+                if (player.getStatus().getConsecutiveDoubles() >= Rules.MAX_DOUBLES) {
                     gameContext.getJailService().sendToJail(player);
                     gameContext.getUserInteractionService().displayMessage("Trzeci dublet z rzędu - idziesz do więzienia");
                     return;

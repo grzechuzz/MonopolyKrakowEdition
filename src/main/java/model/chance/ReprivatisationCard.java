@@ -3,6 +3,7 @@ package model.chance;
 import game.GameContext;
 import model.field.PropertyField;
 import model.player.Player;
+import utils.Rules;
 
 public class ReprivatisationCard implements ChanceCard {
     @Override
@@ -18,7 +19,7 @@ public class ReprivatisationCard implements ChanceCard {
             player.addProperty(placNowy);
             placNowy.setHousesCount(1);
         } else {
-            player.addBalance(300000);
+            player.addBalance(Rules.CARD_REPRIVATISATION_REWARD);
         }
     }
 }

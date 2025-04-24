@@ -3,6 +3,7 @@ package service;
 import model.field.PropertyField;
 import model.player.Player;
 import model.field.Ownable;
+import utils.Rules;
 
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class PropertyTransactionService {
             return false;
 
         boolean firstLap = (player.getStatus().getLaps() == 1);
-        int maxHousesAllowed = firstLap ? 2 : 3;
+        int maxHousesAllowed = firstLap ? Rules.MAX_HOUSES_ALLOWED_FIRST_LAP : Rules.MAX_HOUSES_ALLOWED;
         int housesRemaining = 3 - field.getHousesCount();
         int max = Math.min(maxHousesAllowed, housesRemaining);
 
@@ -95,7 +96,7 @@ public class PropertyTransactionService {
             return false;
 
         int requested = ui.promptHouseCount(field, max);
-        int totalCost = (int)(requested * field.getPrice() * 0.5);
+        int totalCost = (int)(requested * field.getPrice() * Rules.BUILD_HOUSE_COST_FACTOR);
 
         if (player.getBalance() < totalCost) {
             ui.displayMessage("Niewystarczające fundusze, by dokonać transakcji.");
@@ -111,10 +112,10 @@ public class PropertyTransactionService {
         if (field.getOwner() != player)
             return false;
 
-        if (field.getHousesCount() != 3)
+        if (field.getHousesCount() != Rules.MAX_HOUSES_ALLOWED)
             return false;
 
-        int totalCost = (int)(1.5 * field.getPrice());
+        int totalCost = (int)(Rules.BUILD_HOTEL_COST_FACTOR * field.getPrice());
         if (player.getBalance() < totalCost) {
             ui.displayMessage("Niewystarczające fundusze, by dokonać transakcji.");
             return false;
@@ -133,7 +134,7 @@ public class PropertyTransactionService {
         if (field.getOwner() != seller || field.hasHotel())
             return false;
 
-        int buyoutPrice = (int)(field.calculateValue() * 1.5);
+        int buyoutPrice = (int)(field.calculateValue() * Rules.BUY_OPPONENT_FIELD_FACTOR);
 
         if (buyer.getBalance() < buyoutPrice)
             return false;
