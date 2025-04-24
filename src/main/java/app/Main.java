@@ -7,6 +7,7 @@ import model.board.Board;
 import model.chance.*;
 import model.player.Player;
 import game.*;
+import service.events.FieldEffectListener;
 
 import java.util.List;
 import java.util.Random;
@@ -24,6 +25,7 @@ public class Main {
         FestivalService fest = new FestivalService(ui);
         JailService jail = new JailService(dice, ui, pts);
         TravelService travel = new TravelService(ui, board);
+        MovementService movement = new MovementService(board);
 
         List<ChanceCard> deck = List.of(
                 new BirthdayCard(),
@@ -34,18 +36,35 @@ public class Main {
                 new LoseMoneyCard(),
                 new RecieveCardToExitJailCard()
         );
+
         CardService cards = new CardService(deck, new Random());
 
-        List<Player> players = List.of(new Player("Grzech"),
-                                       new Player("Goha"),
-                                       new Player("Jaca"),
-                                       new Player("Kox"));
-        GameContext ctx = new GameContext.Builder()
-                .pts(pts).ui(ui).tax(tax).jail(jail).travel(travel).festival(fest).card(cards).board(board).dice(dice).players(players).build();
+        List<Player> players = List.of(
+                new Player("Grzech"),
+                new Player("Goha"),
+                new Player("Jaca"),
+                new Player("Kox")
+        );
 
-        TurnHandler th = new TurnHandler(ctx);
+        GameContext gameContext = new GameContext.Builder()
+                .pts(pts)
+                .ui(ui)
+                .tax(tax)
+                .jail(jail)
+                .travel(travel)
+                .festival(fest)
+                .movement(movement)
+                .card(cards)
+                .board(board)
+                .dice(dice)
+                .players(players)
+                .build();
+
+        movement.addListener(new FieldEffectListener(gameContext));
+
+        TurnHandler th = new TurnHandler(gameContext);
         VictoryChecker vc = new VictoryChecker();
-        GameEngine engine = new GameEngine(ctx, th, vc);
+        GameEngine engine = new GameEngine(gameContext, th, vc);
 
         engine.runGame();
     }
