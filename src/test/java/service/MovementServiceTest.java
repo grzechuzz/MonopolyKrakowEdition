@@ -52,7 +52,7 @@ class MovementServiceTest {
 
         assertAll(
                 () -> assertEquals(5, player.getPosition()),
-                () -> assertEquals(5000000, player.getBalance()),
+                () -> assertEquals(Rules.START_BALANCE, player.getBalance()),
                 () -> assertEquals(1, player.getStatus().getLaps())
         );
 
@@ -69,7 +69,7 @@ class MovementServiceTest {
 
         assertAll(
                 () -> assertEquals(3, player.getPosition()),
-                () -> assertEquals(5000000 + Rules.PASS_START_BONUS, player.getBalance()),
+                () -> assertEquals(Rules.START_BALANCE + Rules.PASS_START_BONUS, player.getBalance()),
                 () -> assertEquals(2, player.getStatus().getLaps())
         );
 
@@ -85,7 +85,7 @@ class MovementServiceTest {
 
         assertAll(
                 () -> assertEquals(7, player.getPosition()),
-                () -> assertEquals(5000000, player.getBalance()),
+                () -> assertEquals(Rules.START_BALANCE, player.getBalance()),
                 () -> assertEquals(1, player.getStatus().getLaps())
         );
 
@@ -101,7 +101,7 @@ class MovementServiceTest {
 
         assertAll(
                 () -> assertEquals(2, player.getPosition()),
-                () -> assertEquals(5000000 + Rules.PASS_START_BONUS, player.getBalance()),
+                () -> assertEquals(Rules.START_BALANCE + Rules.PASS_START_BONUS, player.getBalance()),
                 () -> assertEquals(2, player.getStatus().getLaps())
         );
 

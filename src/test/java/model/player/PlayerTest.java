@@ -4,6 +4,8 @@ import model.field.*;
 import model.field.PropertyField;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.Rules;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
@@ -18,14 +20,14 @@ class PlayerTest {
     void testAddBalance() {
         player.addBalance(123);
 
-        assertEquals(5000123, player.getBalance());
+        assertEquals(Rules.START_BALANCE + 123, player.getBalance());
     }
 
     @Test
     void testSubtractBalance() {
         player.subtractBalance(50000);
 
-        assertEquals(4950000, player.getBalance());
+        assertEquals(Rules.START_BALANCE - 50000, player.getBalance());
     }
 
     @Test
@@ -71,6 +73,5 @@ class PlayerTest {
                 () -> assertNull(pf.getOwner()),
                 () -> assertFalse(pf.isFestivalActive())
         );
-
     }
 }

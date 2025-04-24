@@ -7,6 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import utils.Rules;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -35,7 +36,7 @@ class TaxServiceTest {
         player.addProperty(pf3);
         pf1.setHousesCount(1);
         pf2.setHotel(true);
-        int expectedTax = (int)(0.1 * (pf1.calculateValue() + pf2.calculateValue() + pf3.calculateValue()));
+        int expectedTax = (int)(Rules.TAX_RATE * (pf1.calculateValue() + pf2.calculateValue() + pf3.calculateValue()));
 
         when(pts.payToBank(player, expectedTax)).thenReturn(true);
 
@@ -61,7 +62,7 @@ class TaxServiceTest {
         player.addProperty(pf1);
         pf1.setHotel(true);
         player.subtractBalance(5000000);
-        int expectedTax = (int)(0.1 * pf1.calculateValue());
+        int expectedTax = (int)(Rules.TAX_RATE * pf1.calculateValue());
 
         ts.payTax(player);
 
