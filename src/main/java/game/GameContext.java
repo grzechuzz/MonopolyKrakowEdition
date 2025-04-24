@@ -16,6 +16,7 @@ public class GameContext {
     private final TravelService travelService;
     private final CardService cardService;
     private final FestivalService festivalService;
+    private final MovementService movementService;
     private final Board board;
     private final Dice dice;
     private final List<Player> players;
@@ -28,6 +29,7 @@ public class GameContext {
         this.travelService = Objects.requireNonNull(b.travelService);
         this.cardService = Objects.requireNonNull(b.cardService);
         this.festivalService = Objects.requireNonNull(b.festivalService);
+        this.movementService = Objects.requireNonNull(b.movementService);
         this.board = Objects.requireNonNull(b.board);
         this.dice = Objects.requireNonNull(b.dice);
         this.players = Objects.requireNonNull(b.players);
@@ -41,6 +43,7 @@ public class GameContext {
         private TravelService travelService;
         private CardService cardService;
         private FestivalService festivalService;
+        private MovementService movementService;
         private Board board;
         private Dice dice;
         private List<Player> players;
@@ -77,6 +80,11 @@ public class GameContext {
 
         public Builder festival(FestivalService fs) {
             festivalService = fs;
+            return this;
+        }
+
+        public Builder movement(MovementService ms) {
+            movementService = ms;
             return this;
         }
 
@@ -126,6 +134,10 @@ public class GameContext {
 
     public FestivalService getFestivalService() {
         return festivalService;
+    }
+
+    public MovementService getMovementService() {
+        return movementService;
     }
 
     public Board getBoard() {
