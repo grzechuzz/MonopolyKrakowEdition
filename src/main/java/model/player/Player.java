@@ -4,7 +4,6 @@ import model.field.Ownable;
 import model.field.PropertyField;
 
 import java.util.ArrayList;
-import java.util.IllformedLocaleException;
 import java.util.List;
 
 
