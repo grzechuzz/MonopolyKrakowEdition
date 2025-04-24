@@ -1,8 +1,6 @@
 package service;
 
-
 import model.board.Board;
-import model.field.Field;
 import model.player.Player;
 import service.events.MovementListener;
 import utils.Rules;

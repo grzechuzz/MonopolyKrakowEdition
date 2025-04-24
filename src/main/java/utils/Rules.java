@@ -1,4 +1,5 @@
 package utils;
 
-public class Rules {
+public final class Rules {
+    public static int PASS_START_BONUS = 500000;
 }
