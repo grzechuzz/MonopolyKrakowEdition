@@ -6,6 +6,7 @@ import model.player.Player;
 import service.*;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GameContext {
     private final PropertyTransactionService propertyTransactionService;
@@ -20,16 +21,16 @@ public class GameContext {
     private final List<Player> players;
 
     private GameContext(Builder b) {
-        this.propertyTransactionService = b.propertyTransactionService;
-        this.userInteractionService = b.userInteractionService;
-        this.taxService = b.taxService;
-        this.jailService = b.jailService;
-        this.travelService = b.travelService;
-        this.cardService = b.cardService;
-        this.festivalService = b.festivalService;
-        this.board = b.board;
-        this.dice = b.dice;
-        this.players = b.players;
+        this.propertyTransactionService = Objects.requireNonNull(b.propertyTransactionService);
+        this.userInteractionService = Objects.requireNonNull(b.userInteractionService);
+        this.taxService = Objects.requireNonNull(b.taxService);
+        this.jailService = Objects.requireNonNull(b.jailService);
+        this.travelService = Objects.requireNonNull(b.travelService);
+        this.cardService = Objects.requireNonNull(b.cardService);
+        this.festivalService = Objects.requireNonNull(b.festivalService);
+        this.board = Objects.requireNonNull(b.board);
+        this.dice = Objects.requireNonNull(b.dice);
+        this.players = Objects.requireNonNull(b.players);
     }
 
     public static class Builder {
