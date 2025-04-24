@@ -34,7 +34,7 @@ public class Main {
                 new ReprivatisationCard(),
                 new StationStairsCard(),
                 new LoseMoneyCard(),
-                new RecieveCardToExitJailCard()
+                new ReceiveCardToExitJailCard()
         );
 
         CardService cards = new CardService(deck, new Random());
