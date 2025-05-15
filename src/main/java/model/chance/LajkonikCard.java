@@ -7,8 +7,8 @@ import utils.Rules;
 public class LajkonikCard implements ChanceCard {
     @Override
     public String getDescription() {
-        return "Zostałes uderzony buławą przez Lajkonika podczas pochodu! Przynosi Ci to szczęscie -" +
-                " otrzymujesz 250 000 PLN!";
+        return "Zostałes uderzony buławą przez Lajkonika podczas pochodu! Przynosi Ci to szczęście - " +
+                "otrzymujesz 250 000 PLN!";
     }
 
     @Override
