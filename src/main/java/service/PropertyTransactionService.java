@@ -154,4 +154,20 @@ public class PropertyTransactionService {
 
         return true;
     }
+
+    public boolean forceSellOneField(PropertyField field) {
+        Player seller = field.getOwner();
+
+        if (seller == null || field.hasHotel())
+            return false;
+
+        int val = field.calculateValue();
+        field.cleanUp();
+        seller.deleteProperty(field);
+        seller.addBalance(val);
+        ui.displayMessage(seller.getNickname() + " sprzedaje pole " + field.getName() + " za " + val +
+                " PLN (wymuszona sprzedaż).");
+
+        return true;
+    }
 }
