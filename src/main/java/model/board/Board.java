@@ -39,7 +39,7 @@ public class Board {
         fields.add(new PropertyField("Wielicka", 14, 440000, 190000));
         fields.add(new ResortField("Bagry", 15, 600000, 100000));
         fields.add(new PropertyField("Stella‑Sawickiego", 16, 500000, 200000));
-        fields.add(new SpecialField("Tauron Arena", 17, 750000, 80000));
+        fields.add(new SpecialField("Tauron Arena", 17, 800000, 350000));
         fields.add(new PropertyField("Opolska", 18, 520000, 220000));
         fields.add(new PropertyField("Tetmajera", 19, 530000, 230000));
         fields.add(new FestivalField("FESTIWAL", 20));
@@ -47,7 +47,7 @@ public class Board {
         fields.add(new ChanceField("Szansa", 22));
         fields.add(new PropertyField("Tyniecka", 23, 560000, 250000));
         fields.add(new PropertyField("Kapelanka", 24, 570000, 260000));
-        fields.add(new SpecialField("Szpital psychiatryczny – Kobierzyn", 25, 750000, 80000));
+        fields.add(new SpecialField("Szpital psychiatryczny – Kobierzyn", 25, 800000, 350000));
         fields.add(new PropertyField("Czarnowiejska", 26, 580000, 270000));
         fields.add(new ResortField("Zakrzówek", 27, 600000, 100000));
         fields.add(new PropertyField("al. Juliusza Słowackiego", 28, 590000, 280000));
@@ -59,7 +59,7 @@ public class Board {
         fields.add(new PropertyField("Miodowa", 34, 850000, 350000));
         fields.add(new ResortField("Kopiec Krakusa", 35, 600000, 100000));
         fields.add(new PropertyField("Plac Nowy", 36, 950000, 400000));
-        fields.add(new SpecialField("Okrąglak", 37, 750000, 80000));
+        fields.add(new SpecialField("Okrąglak", 37, 800000, 350000));
         fields.add(new PropertyField("Grodzka", 38, 900000, 450000));
         fields.add(new PropertyField("Floriańska", 39, 1000000, 500000));
     }
