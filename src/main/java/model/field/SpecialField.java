@@ -49,6 +49,7 @@ public class SpecialField extends Field implements Ownable {
         owner = null;
     }
 
+    @Override
     public void executeEffect(Player player, GameContext gc) {
         if (owner == null) {
             gc.getPropertyTransactionService().buyField(player, this);
