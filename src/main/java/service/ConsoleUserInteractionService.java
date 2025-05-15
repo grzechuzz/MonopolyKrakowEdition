@@ -167,10 +167,15 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         } else if (field instanceof ResortField rf) {
             sb.append(" | ośrodek | cena: ").append(rf.getPrice())
                     .append(" | czynsz: ").append(rf.calculateRent());
-        } else if (field instanceof SpecialField sf) {
+        }  else if (field instanceof SpecialField sf) {
+        if (sf.getOwner() == null) {
+            sb.append(" | wolne | cena: ").append(sf.getPrice()).append(" PLN");
+        } else {
             sb.append(" | specjalne | cena: ").append(sf.getPrice())
-                    .append(" | czynsz: ").append(sf.calculateRent());
+                    .append(" | czynsz: ").append(sf.calculateRent()).append(" PLN");
+            }
         }
+
         io.displayMessage(sb.toString());
     }
 }

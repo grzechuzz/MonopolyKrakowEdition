@@ -48,10 +48,10 @@ public class Main {
         CardService cards = new CardService(deck, new Random());
 
         List<Player> players = List.of(
-                new Player("Grzech"),
+                new Player("GrzechuGOD"),
                 new Player("Goha"),
-                new Player("Jaca"),
-                new Player("Kox")
+                new Player("Lemur"),
+                new Player("TimON")
         );
 
         GameContext gameContext = new GameContext.Builder()
