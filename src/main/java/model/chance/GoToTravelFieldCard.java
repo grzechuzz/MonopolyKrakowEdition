@@ -13,5 +13,4 @@ public class GoToTravelFieldCard implements ChanceCard {
     public void apply(Player player, GameContext gc) {
         gc.getMovementService().moveTo(player, 30);
     }
-
 }
