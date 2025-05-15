@@ -29,12 +29,20 @@ public class Main {
 
         List<ChanceCard> deck = List.of(
                 new BirthdayCard(),
+                new DlugaTramBlockCard(),
+                new ForcedSaleCard(),
+                new GoToZakrzowekCard(),
                 new GoToJailCard(),
-                new MacheteFightCard(),
-                new ReprivatisationCard(),
-                new StationStairsCard(),
+                new GoToTravelFieldCard(),
+                new JuwenaliaCard(),
+                new LajkonikCard(),
                 new LoseMoneyCard(),
-                new ReceiveCardToExitJailCard()
+                new MacheteFightCard(),
+                new ReceiveCardToExitJailCard(),
+                new ReprivatisationCard(),
+                new ShineClubCard(),
+                new StationStairsCard(),
+                new ZapiekankaCard()
         );
 
         CardService cards = new CardService(deck, new Random());
