@@ -15,6 +15,7 @@ public final class Rules {
     public static final int CARD_MACHETE_FIGHT_MONEY = 50000;
     public static final int CARD_DLUGA_TRAM_BLOCK_FINE = 500000;
     public static final int CARD_LAJKONIK_REWARD = 250000;
+    public static final int CARD_SHINE_CLUB_FINE = 100000;
     public static final double BUILD_HOUSE_COST_FACTOR = 0.5;
     public static final double BUILD_HOTEL_COST_FACTOR = 1.5;
     public static final double BUY_OPPONENT_FIELD_FACTOR = 1.5;
