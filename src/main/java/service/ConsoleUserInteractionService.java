@@ -85,6 +85,20 @@ public class ConsoleUserInteractionService implements UserInteractionService {
     }
 
     @Override
+    public PropertyField chooseFieldToForceSell(Player player, List<PropertyField> fields) {
+        io.displayMessage(player.getNickname() + ", wybierz jedno pole przeciwnika do wymuszonej sprzedaży");
+        for (int i = 0; i < fields.size(); ++i) {
+            PropertyField pf = fields.get(i);
+            io.displayMessage(i + ") " + pf.getName() + " (wartość: " + pf.calculateValue() + " PLN)");
+        }
+        int choice = io.readInt();
+        if (choice < 0 || choice >= fields.size())
+            return null;
+
+        return fields.get(choice);
+    }
+
+    @Override
     public int promptHouseCount(PropertyField field, int max) {
         io.displayMessage("Ile domów chcesz postawić na polu " + field.getName() + " (0–" + max + ")?");
         int choice = io.readInt();

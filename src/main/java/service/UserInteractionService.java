@@ -13,6 +13,7 @@ public interface UserInteractionService {
     List<Ownable> propertiesToSell(Player player);
     PropertyField chooseFestivalField(Player player);
     Ownable chooseTravelDestination(List<Ownable> fields);
+    PropertyField chooseFieldToForceSell(Player player, List<PropertyField> fields);
     int promptHouseCount(PropertyField field, int max);
     int chooseJailOption();
     void displayMessage(String message);
