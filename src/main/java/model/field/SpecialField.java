@@ -31,7 +31,12 @@ public class SpecialField extends Field implements Ownable {
 
     @Override
     public int calculateRent() {
-        return baseRent;
+        int count = 0;
+        for (var f : owner.getProperties())
+            if (f instanceof SpecialField)
+                count++;
+
+        return baseRent * count;
     }
 
     @Override
