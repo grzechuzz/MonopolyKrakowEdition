@@ -47,12 +47,8 @@ public class Main {
 
         CardService cards = new CardService(deck, new Random());
 
-        List<Player> players = List.of(
-                new Player("GrzechuGOD"),
-                new Player("Goha"),
-                new Player("Lemur"),
-                new Player("TimON")
-        );
+        final int PLAYERS = 4;
+        List<Player> players = ui.askForPlayers(PLAYERS);
 
         GameContext gameContext = new GameContext.Builder()
                 .pts(pts)
