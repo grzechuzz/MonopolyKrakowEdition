@@ -178,4 +178,17 @@ public class ConsoleUserInteractionService implements UserInteractionService {
 
         io.displayMessage(sb.toString());
     }
+
+    @Override
+    public List<Player> askForPlayers(int howMany) {
+        List<Player> players = new ArrayList<>();
+        for (int i = 1; i <= howMany; i++) {
+            io.displayMessage("Podaj nick gracza " + i + ": ");
+            String nick = io.readString().trim();
+            if (nick.isBlank()) nick = "Player" + i;
+            players.add(new Player(nick));
+        }
+        return players;
+    }
+
 }

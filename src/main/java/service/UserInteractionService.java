@@ -19,4 +19,6 @@ public interface UserInteractionService {
     void displayMessage(String message);
     void showPlayerStatus(Player p);
     void showFieldInfo(Field field);
+    List<Player> askForPlayers(int howMany);
+
 }
