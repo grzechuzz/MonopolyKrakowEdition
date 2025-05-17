@@ -7,4 +7,5 @@ public interface GameIO {
     boolean askYesNo(String question);
     int readInt();
     List<Integer> readInts();
+    String readString();
 }

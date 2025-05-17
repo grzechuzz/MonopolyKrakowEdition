@@ -51,4 +51,9 @@ public class ConsoleIO implements GameIO {
 
         return result;
     }
+
+    @Override
+    public String readString() {
+        return sc.nextLine();
+    }
 }
