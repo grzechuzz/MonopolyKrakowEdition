@@ -56,4 +56,10 @@ public class ConsoleIO implements GameIO {
     public String readString() {
         return sc.nextLine();
     }
+
+    @Override
+    public void waitForEnter(String message) {
+        System.out.println(message);
+        sc.nextLine();
+    }
 }

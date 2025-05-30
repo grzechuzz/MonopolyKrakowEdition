@@ -8,4 +8,5 @@ public interface GameIO {
     int readInt();
     List<Integer> readInts();
     String readString();
+    void waitForEnter(String message);
 }

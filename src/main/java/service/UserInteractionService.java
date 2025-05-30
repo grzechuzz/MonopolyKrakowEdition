@@ -20,5 +20,6 @@ public interface UserInteractionService {
     void showPlayerStatus(Player p);
     void showFieldInfo(Field field);
     List<Player> askForPlayers(int howMany);
+    void waitForRoll(Player player);
 
 }

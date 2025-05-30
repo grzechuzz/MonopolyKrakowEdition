@@ -191,4 +191,8 @@ public class ConsoleUserInteractionService implements UserInteractionService {
         return players;
     }
 
+    @Override
+    public void waitForRoll(Player player) {
+        io.waitForEnter("Tura gracza " + player.getNickname() + ". Wcisnij ENTER, by rzucić kostkami");
+    }
 }

@@ -16,6 +16,7 @@ public class TurnHandler {
 
     public void executeTurn(Player player) {
         gameContext.getUserInteractionService().showPlayerStatus(player);
+        gameContext.getUserInteractionService().waitForRoll(player);
 
         JailOutcome outcome = null;
         if (player.getStatus().getJailRounds() > 0) {
