@@ -25,17 +25,18 @@ class CardServiceTest {
 
     @BeforeEach
     void setUp() {
+        when(random.nextInt(3)).thenReturn(2);
+        when(random.nextInt(2)).thenReturn(0);
         List<ChanceCard> cards = List.of(c1, c2, c3);
         cs = new CardService(cards, random);
     }
 
     @Test
     void testDraw() {
-        when(random.nextInt(3)).thenReturn(2);
-
         ChanceCard card = cs.draw();
 
-        assertSame(c3, card);
+        assertSame(c2, card);
         verify(random).nextInt(3);
+        verify(random).nextInt(2);
     }
 }

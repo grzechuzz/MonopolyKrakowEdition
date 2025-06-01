@@ -45,7 +45,7 @@ public class ConsoleIO implements GameIO {
                 int idx = Integer.parseInt(token);
                 result.add(idx);
             } catch (NumberFormatException e) {
-                // ignore
+                //
             }
         }
 

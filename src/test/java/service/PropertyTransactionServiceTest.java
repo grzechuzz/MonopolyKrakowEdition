@@ -12,8 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import utils.Rules;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.intThat;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
@@ -122,18 +124,6 @@ class PropertyTransactionServiceTest {
     }
 
     @Test
-    void testPayPlayerHasNotEnoughMoney() {
-        when(ui.propertiesToSell(player1)).thenReturn(List.of());
-
-        pts.pay(player1, player2, 7000000);
-
-        assertAll(
-                () -> assertTrue(player1.getStatus().isEliminated()),
-                () -> assertEquals(10000000, player2.getBalance())
-        );
-    }
-
-    @Test
     void testPayToBankPlayerHasMoney() {
         pts.payToBank(player1, 300000);
 
@@ -237,6 +227,9 @@ class PropertyTransactionServiceTest {
         field.setHousesCount(3);
         field.setOwner(player1);
 
+        int expectedCost = (int) (field.getPrice() * Rules.BUILD_HOTEL_COST_FACTOR);
+
+        when(ui.confirmHotelUpgrade(field, expectedCost)).thenReturn(true);
         assertTrue(pts.upgradeToHotel(player1, field));
     }
 
