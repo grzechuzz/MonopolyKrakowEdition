@@ -44,7 +44,11 @@ public class GameEngine {
           }
         }
 
-        Player winner = players.get(0);
+        Player winner;
+        if (players.size() > 1)
+            winner = players.get(currentPlayer);
+        else
+            winner = players.get(0);
         gameContext.getUserInteractionService().displayMessage("Koniec gry! Zwycięzca: " + winner.getNickname());
     }
 }
