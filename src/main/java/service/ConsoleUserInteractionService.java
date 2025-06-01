@@ -165,7 +165,7 @@ public class ConsoleUserInteractionService implements UserInteractionService {
                 }
             }
         } else if (field instanceof ResortField rf) {
-            sb.append(" | ośrodek | cena: ").append(rf.getPrice())
+            sb.append(" | resort | cena: ").append(rf.getPrice())
                     .append(" | czynsz: ").append(rf.calculateRent());
         }  else if (field instanceof SpecialField sf) {
         if (sf.getOwner() == null) {
