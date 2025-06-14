@@ -14,6 +14,7 @@ public class PlayerStatus {
         this.consecutiveDoubles = 0;
         this.laps = 1;
         this.eliminated = false;
+        this.travel = false;
     }
 
     public boolean hasJailExitCard() {

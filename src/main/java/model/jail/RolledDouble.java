@@ -10,5 +10,6 @@ public final class RolledDouble implements JailOutcome {
     public int getSum() {
         return sum;
     }
-
 }
+
+

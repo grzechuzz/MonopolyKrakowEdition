@@ -41,15 +41,15 @@ public class Player {
 
     public void addBalance(int amount) {
         if (amount < 0)
-            throw new IllegalArgumentException("Amount cannot be negative!");
+            throw new IllegalArgumentException();
         balance += amount;
     }
 
     public void subtractBalance(int amount) {
         if (amount < 0)
-            throw new IllegalArgumentException("Amount cannot be negative!");
+            throw new IllegalArgumentException();
         if (balance < amount)
-            throw new IllegalStateException("Balance too low: can't do that operation.");
+            throw new IllegalStateException();
         balance -= amount;
     }
 
